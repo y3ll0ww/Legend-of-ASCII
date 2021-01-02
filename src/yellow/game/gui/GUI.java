@@ -93,6 +93,8 @@ public class GUI extends JPanel {
                     } else {
                         CommandList.introScene(command);
                     }
+                } else if(LayoutPicker.entry >= 9960 && LayoutPicker.entry < 9970){
+                    CommandList.battleMode(command);
                 } else if(LayoutPicker.entry >= 9970 && LayoutPicker.entry < 9980){
                     CommandList.foundLoot(command);
                 } else if(LayoutPicker.entry >= 9980 && LayoutPicker.entry < 9990){

@@ -3,8 +3,11 @@ package yellow.game.gui;
 import static yellow.game.gui.ScreenDrawer.*;
 import static yellow.game.resources.objects.Map.*;
 
+import yellow.game.resources.BattleMode;
 import yellow.game.resources.Inventory;
 import yellow.game.resources.LootBox;
+import yellow.game.resources.NPC.Avatar;
+import yellow.game.resources.NPC.Enemy;
 import yellow.game.resources.objects.PlayerCharacter;
 import yellow.game.resources.objects.Map;
 
@@ -672,6 +675,75 @@ public class Layouts {
                 drawString(36, "   [T] Take");
                 drawString(37, "   [D] Drop");
                 break;
+        }
+    }
+
+    public static void battleMode(){
+        if(LayoutPicker.entry == 9960){
+            wipeScreenWithExceptions(1, 3, 32, 39, 0, 0);
+        }
+        nameHPMPEnergy(2);
+        drawString(7, BattleMode.displayHealthBar());
+        drawString(8, BattleMode.displayHealthNumeric());
+        switch(LayoutPicker.entry){
+            case 9960:
+                drawString(5, "   .-=====================================================================================-.");
+                drawString(6, BattleMode.displayName());
+                drawString(9, "   '-=====================================================================================-'");
+                drawString(10, Avatar.getAvatar(0));
+                drawString(11, Avatar.getAvatar(1));
+                drawString(12, Avatar.getAvatar(2));
+                drawString(13, Avatar.getAvatar(3));
+                drawString(14, Avatar.getAvatar(4));
+                drawString(15, Avatar.getAvatar(5));
+                drawString(16, Avatar.getAvatar(6));
+                drawString(17, Avatar.getAvatar(7));
+                drawString(18, Avatar.getAvatar(8));
+                drawString(19, Avatar.getAvatar(9));
+                drawString(20, Avatar.getAvatar(10));
+                drawString(21, Avatar.getAvatar(11));
+                drawString(22, Avatar.getAvatar(12));
+                drawString(23, Avatar.getAvatar(13));
+                drawString(24, Avatar.getAvatar(14));
+                drawString(25, Avatar.getAvatar(15));
+                drawString(26, Avatar.getAvatar(16));
+                drawString(27, Avatar.getAvatar(17));
+                drawString(28, Avatar.getAvatar(18));
+                drawString(29, Avatar.getAvatar(19));
+                drawString(30, Avatar.getAvatar(20));
+                drawString(31, Avatar.getAvatar(21));
+                drawString(35, BattleMode.getDisplayInfo());
+                break;
+            case 9961: // Players turn
+                drawString(34, BattleMode.displayAttack(0) + "[I] Inventory");
+                drawString(35, BattleMode.displayAttack(1) + "[R] Rest (+5 NRGY)");
+                drawString(36, BattleMode.displayAttack(2) + "[T] Toggle Spells");
+                drawString(37, BattleMode.displayAttack(3) + "[E] Escape");
+                break;
+            case 9962: // Player turn results
+                wipeMultipleStrings(34, 36, 37);
+                drawString(35, BattleMode.getDisplayInfo());
+                break;
+            case 9963: // Player killed enemy
+                drawString(36, "   You conquered the " + Enemy.getName() + "!");
+                break;
+            case 9964: // Looting conquered enemy
+                wipeString(36);
+                drawString(35, BattleMode.getDisplayInfo());
+                if(BattleMode.hasLoot()){
+                    drawString(37, "   [T] Take  - [DROP] Drop loot");
+                }
+                break;
+            case 9965: // Enemies turn
+                wipeMultipleStrings(34, 36, 37);
+                drawString(35, "   The enemy is preparing to attack!");
+                break;
+            case 9966: // Enemies attack results
+                drawString(36, BattleMode.getDisplayInfo());
+                break;
+            case 9968:
+                drawString(36, BattleMode.getDisplayInfo());
+
         }
     }
 

@@ -1,14 +1,11 @@
 package yellow.game.gui;
 
-import yellow.game.AudioPlayer;
 import yellow.game.resources.Inventory;
 import yellow.game.resources.LootBox;
 import yellow.game.resources.objects.PlayerCharacter;
 import yellow.game.resources.objects.Map;
 import yellow.game.resources.BattleMode;
 import yellow.game.resources.objects.Weapon;
-
-import java.util.Random;
 
 public class CommandList {
     public static void TestEnvironment(String input){
@@ -33,6 +30,7 @@ public class CommandList {
                 LayoutPicker.entry++;
                 if(LayoutPicker.entry == 1) { //Main menu
                     AudioPlayer.playSound("One8bit.wav", true);
+                    //AudioPlayer.adjustVolume(-10.0f);
                 }
                 LayoutPicker.browseLayout();
         }
@@ -279,7 +277,7 @@ public class CommandList {
                     System.out.println("HP: " + PlayerCharacter.getHP() + "\nMP: " + PlayerCharacter.getMP() + "\nEnergy: " + PlayerCharacter.getEnergy() + "\nStrength: " + PlayerCharacter.getStrength() + "\nDefence: " + PlayerCharacter.getDefence() + "\nDexterity: " + PlayerCharacter.getDexterity() + "\nEndurance: " + PlayerCharacter.getEndurance() + "\nMagic: " + PlayerCharacter.getMagic());
                     next = 50; //Going to story introduction
                     AudioPlayer.stopSound();
-                    AudioPlayer.playSound("zapsplat_positive_003_57874.wav", false);
+                    AudioPlayer.playSound("startgame.wav", false);
                     break;
                 case "BACK":
                     for (int i = 10; i <= 15; i++) {
@@ -304,7 +302,7 @@ public class CommandList {
                     LayoutPicker.entry = 67;
                 } else if(LayoutPicker.entry == 69){
                     //Go to BATTLE MODE qwerty
-                    new BattleMode();
+                    //new BattleMode();
                     //LayoutPicker.entry = 2000;
                 }
                 LayoutPicker.browseLayout();
@@ -313,15 +311,18 @@ public class CommandList {
                 if(LayoutPicker.entry == 65){  // ADD WOODEN STICK TO EQUIPMENT qwerty
                     LayoutPicker.entry = 66;
                     boolean biglog = false;
-                    int moredamage = 0;
-                    int moreweight = 0;
+                    int extraDMG = 0;
+                    int extraWGT = 0;
                     if(PlayerCharacter.getRace(0) == "orc"){
                         biglog = true;
-                        moredamage += 10;
-                        moreweight += 5; }
+                        extraDMG += 10;
+                        extraWGT += 5; }
                     if(PlayerCharacter.getClassmode() == "warrior"){
-                        moredamage += 10; }
-                    Weapon WoodenStick = new Weapon("no", 1, "WOODEN", "STICK", 5 + moreweight, 10 + moredamage, 0, "NONE", biglog, false, false);
+                        extraDMG += 10; }
+                    Weapon WoodenStick = new Weapon("no", 1, "WOODEN", "STICK", 5 + extraWGT, 10 + extraDMG, 0, "NONE", biglog, false, false);
+                    if(PlayerCharacter.getRace(1) == "Orc"){
+                        WoodenStick.setName("WOODEN LOG");
+                    }
                     AudioPlayer.playSound("cloth1.wav", false);
                     Inventory.addWeaponToEmptySlot(WoodenStick, 65);
                 } else if(LayoutPicker.entry == 69){
@@ -367,7 +368,11 @@ public class CommandList {
                     Map.decideEvent(true); ///Deze verplaatsen naar de Map (de method)
                 } break;
             case "EXIT":
-                Inventory.returnToGame();
+                if(LayoutPicker.entry == 9991){
+                    LayoutPicker.entry = 9990;
+                } else {
+                    Inventory.returnToGame();
+                }
         }
         LayoutPicker.browseLayout();
     }
@@ -398,6 +403,71 @@ public class CommandList {
         for(int i = firstentry; i <= previous; i++){
             LayoutPicker.entry = i;
             LayoutPicker.browseLayout();
+        }
+    }
+
+    public static void battleMode(String input){
+
+        switch(input){
+            case "1":
+            case "2":
+            case "3":
+            case "4":
+                if(LayoutPicker.entry == 9961){
+                    BattleMode.doDamage(Integer.parseInt(input) - 1);
+                    LayoutPicker.entry = 9962;
+                }
+                break;
+            case "E":
+                if(LayoutPicker.entry == 9961){
+                    if(BattleMode.tryEscape()){
+                        Map.setDisplayInformation("You've succesfully escaped the fight.");
+                        LayoutPicker.entry = BattleMode.getEnterEntry();
+                    } else {
+                        BattleMode.setDisplayInfo("   Your attempt to escape failed...");
+                        LayoutPicker.entry = 9962;
+                    }
+                }
+                break;
+            case "T":
+                if(LayoutPicker.entry == 9964){
+                    LootBox.takeLoot();
+                    if(LootBox.isGold()){
+                        AudioPlayer.playSound("clothBelt2.wav", false);
+                    } else {
+                        AudioPlayer.playSound("cloth1.wav", false);
+                    }
+                }
+            case "DROP":
+                if(LayoutPicker.entry == 9964){
+                    LayoutPicker.entry = BattleMode.getEnterEntry();
+                }
+            default:
+                if(LayoutPicker.entry == 9960 && BattleMode.getPlayerGoesFirst()){
+                    LayoutPicker.entry = 9961;
+                } else if(LayoutPicker.entry == 9960 && !BattleMode.getPlayerGoesFirst()) {
+                    //BattleMode(enemydoesattack);
+                    LayoutPicker.entry = 9965;
+                } else if(LayoutPicker.entry == 9962) { // Player has attacked
+                    if (!BattleMode.enemyDied()) {
+                        LayoutPicker.entry = 9965;
+                    } else {
+                        LayoutPicker.entry = 9963;
+                    }
+                } else if(LayoutPicker.entry == 9963){ // Player killed the enemy
+                    BattleMode.generateLoot();
+                    if(BattleMode.hasLoot()){
+                        LayoutPicker.entry = 9964;
+                    } else {
+                        LayoutPicker.entry = BattleMode.getEnterEntry(); // -- Going back to Map
+                    }
+                } else if(LayoutPicker.entry == 9965){ // Enemy is going to attack
+                    BattleMode.takeDamage();
+                    LayoutPicker.entry = 9966;
+                } else if(LayoutPicker.entry == 9966){ // Enemy has attacked
+                    // CHECK PLAYERS HEALTH
+                    LayoutPicker.entry = 9961;
+                }
         }
     }
 

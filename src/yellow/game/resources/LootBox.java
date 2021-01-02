@@ -1,6 +1,7 @@
 package yellow.game.resources;
 
 import yellow.game.gui.LayoutPicker;
+import yellow.game.resources.objects.Head;
 import yellow.game.resources.objects.Item;
 import yellow.game.resources.objects.PlayerCharacter;
 import yellow.game.resources.objects.Weapon;
@@ -13,6 +14,7 @@ public class LootBox {
 
     static Item itemslot;
     static Weapon weaponslot;
+    static Head headslot;
     static int goldslot;
 
     public static String getLootName(){ return lootname; }
@@ -22,10 +24,17 @@ public class LootBox {
     public static void setGoldSlot(int amount){ goldslot = 0; goldslot += amount; }
 
     public LootBox(){
-        Random rd = new Random();
         setReturnEntry(LayoutPicker.entry);
-
-        int loot = rd.nextInt(2); // 0: Gold; 1: Weapon; 2: Shield; 3: Head; 4: Armor; 5: Feet;
+        generateLoot();
+        LayoutPicker.entry = 9970;
+    }
+    public LootBox(boolean battlemode){
+        setReturnEntry(9990);
+        generateLoot();
+    }
+    static void generateLoot(){
+        Random rd = new Random();
+        int loot = rd.nextInt(3); // 0: Gold; 1: Weapon; 2: Head; 3: Shield; 4: Armor; 5: Feet;
         int bound;
 
         switch(loot){
@@ -52,45 +61,63 @@ public class LootBox {
                 setLootName(getGoldSlot()  + " GOLD");
                 break;
             case 1: //loot = WEAPON
-                int addition;
-                if(PlayerCharacter.getLevel() < 5){
-                    addition = rd.nextInt(5);
-                } else if(PlayerCharacter.getLevel() < 10){
-                    addition = rd.nextInt(10);
-                } else if(PlayerCharacter.getLevel() < 20){
-                    addition = rd.nextInt(20);
-                } else {
-                    addition = rd.nextInt(30);
-                }
-                int weaponlevel = rd.nextInt(PlayerCharacter.getLevel() + addition);
                 //Dit moet naar assign methode en het wapen in de working storage array
-                Weapon weaponFound = new Weapon(weaponlevel + 1, "");
+                Weapon weaponFound = new Weapon(equipablesAddition(), "");
                 holdLoot(weaponFound);
                 setLootName(weaponFound.getName() + " (LVL " + weaponFound.getLevel() + ")");
+                break;
+            case 2: //loot = HEAD
+                Head headFound = new Head(equipablesAddition(), "");
+                holdLoot(headFound);
+                setLootName(headFound.getName() + " (LVL " + headFound.getLevel() + ")");
         }
-        LayoutPicker.entry = 9970;
     }
-    static void holdLoot(int gold){ setItemSlot(null); setWeaponSlot(null); setGoldSlot(gold); }
-    static void holdLoot(Weapon weapon){ setGoldSlot(0); setItemSlot(null); setWeaponSlot(weapon); }
-    static void holdLoot(Item item){ setGoldSlot(0); setWeaponSlot(null); setItemSlot(item); }
+
+    static int equipablesAddition(){
+        Random rd = new Random();
+        int addition;
+        if(PlayerCharacter.getLevel() < 5){
+            addition = rd.nextInt(5);
+        } else if(PlayerCharacter.getLevel() < 10){
+            addition = rd.nextInt(10);
+        } else if(PlayerCharacter.getLevel() < 20){
+            addition = rd.nextInt(20);
+        } else {
+            addition = rd.nextInt(30);
+        }
+        return rd.nextInt(PlayerCharacter.getLevel() + addition) + 1;
+    }
+
+    static void initializeSlots(){
+        setGoldSlot(0);
+        setItemSlot(null);
+        setWeaponSlot(null);
+        setHeadSlot(null);
+    }
+    static void holdLoot(int gold){ initializeSlots(); setGoldSlot(gold); }
+    static void holdLoot(Weapon weapon){ initializeSlots(); setWeaponSlot(weapon); }
+    static void holdLoot(Head head) { initializeSlots(); setHeadSlot(head);}
+    static void holdLoot(Item item){ initializeSlots(); setItemSlot(item); }
 
     public static int getGoldSlot(){ return goldslot; }
     public static void setWeaponSlot(Weapon weapon){ weaponslot = weapon; }
     public static Weapon getWeaponSlot(){ return weaponslot; }
+    public static void setHeadSlot(Head head){ headslot = head; }
+    public static Head getHeadSlot(){ return headslot; }
     public static void setItemSlot(Item item){ itemslot = item; }
     public static Item getItemSlot(){ return itemslot; }
 
     static public boolean isGold(){ if(getGoldSlot() != 0){ return true; } else {return false;} }
     static public boolean isWeapon(){ if(getWeaponSlot() != null){ return true;} else { return false; } }
+    static public boolean isHead(){ if(getHeadSlot() != null ){ return true;} else { return false; } }
     static public boolean isItem(){ if(getItemSlot() != null){ return true;} else { return false; } }
 
     public static void takeLoot(){
-        System.out.println("takeLoot: returnentry = " + returnentry);//////////////////////////////////////////////
         if(isGold()){
             Inventory.setGold(Inventory.getGold() + getGoldSlot());
             returnToGame();
         } else if(isItem()){
-            ///
+            /////////////////////////////////////
             returnToGame();
         } else if(isWeapon()){
             if(PlayerCharacter.getStrength() < Inventory.getTotalWeight() + getWeaponSlot().getWeight()){
@@ -99,7 +126,17 @@ public class LootBox {
                 Inventory.addWeaponToEmptySlot(getWeaponSlot(), returnentry);
                 returnToGame();
             }
+        } else if(isHead()){
+            if(PlayerCharacter.getStrength() < Inventory.getTotalWeight() + getHeadSlot().getWeight()){
+                Inventory.addHeadToEmptySlot(getHeadSlot(), returnentry);
+            } else {
+                Inventory.addHeadToEmptySlot(getHeadSlot(), returnentry);
+                returnToGame();
+            }
         }
     }
-    public static void returnToGame(){ LayoutPicker.entry = returnentry; System.out.println("returnToGame: returnentry = " + returnentry);}///////////////////////////////
+
+    public static void returnToGame(){
+        LayoutPicker.entry = returnentry; System.out.println("returnToGame: returnentry = " + returnentry);
+    }///////////////////////////////
 }

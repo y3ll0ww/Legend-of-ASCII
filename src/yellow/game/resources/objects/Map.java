@@ -1,8 +1,10 @@
 package yellow.game.resources.objects;
 
-import yellow.game.AudioPlayer;
+import yellow.game.gui.AudioPlayer;
 import yellow.game.gui.LayoutPicker;
+import yellow.game.resources.BattleMode;
 import yellow.game.resources.LootBox;
+import yellow.game.resources.NPC.Enemy;
 
 import java.util.Random;
 
@@ -181,13 +183,13 @@ public class Map {
         int enemy = 0; //chance of encountering enemy
         int loot = 0; //chance of encountering loot
 
-        if(Map.map[Map.posX][Map.posY][1] == "Heath"){
+        if(map[posX][posY][1] == "Heath"){
             enemy = 10; loot = 40; //10-30
-        } else if(Map.map[Map.posX][Map.posY][1] == "Forest"){
+        } else if(map[posX][posY][1] == "Forest"){
             enemy = 15; loot = 45; //15-30
-        } else if(Map.map[Map.posX][Map.posY][1] == "Mountains"){
+        } else if(map[posX][posY][1] == "Mountains"){
             enemy = 25; loot = 55; //25-30
-        } else if(Map.map[Map.posX][Map.posY][1] == "Swamp"){
+        } else if(map[posX][posY][1] == "Swamp"){
             enemy = 40; loot = 60; //40-20
         }
         if(resting){
@@ -198,10 +200,13 @@ public class Map {
         if(PlayerCharacter.getEnergy() >= 30 && !resting //Not resting; enough energy to move
         || PlayerCharacter.getEnergy() != PlayerCharacter.getMaxEnergy() && resting){ //Resting; not max energy
             if(percentage <= enemy){
-                ///////BATTLE MODE ACTIVATED
-                System.out.println("BATTLE MODE ACTIVATED");
+                Enemy foe = new Enemy(Map.map[posX][posY][1]);
+                AudioPlayer.playSound("battlemode.wav", false);
+                setDisplayInformation("You've fought of an enemy foe.");
+                new BattleMode(PlayerCharacter.getInitiative());
             } else if(percentage <= loot){
-                AudioPlayer.playSound("zapsplat_sudden_event_tone_56854.wav", false);
+                AudioPlayer.playSound("lootbox.wav", false);
+                setDisplayInformation("You've found loot.");
                 new LootBox();
             }
         }

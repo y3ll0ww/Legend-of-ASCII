@@ -1,46 +1,30 @@
 package yellow.game.resources.objects;
 
-import java.util.Random;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Weapon extends Item {
-    Random rd = new Random();
-
-    String name;
-    //int level;
     boolean twohanded;
     boolean ranged;
     int ismagical; // 0 = false; 1 = true; 2 = undecided;
-    int weight;
-
-    String material;
-    int matclass;
-    String type;
-    int typeclass;
 
     int damage;
     int magicdamage;
-    String magictype;
 
-    double magicmultiplier;
-    double damagemultiplier;
-
-    public String getName() { return this.name; }
-    public int getLevel() { return this.level; }
-  //  public int getWeight() { return this.weight; }
+    public int getWeight() { return this.weight; }
     public int getDamage() { return this.damage; }
     public int getMagicDamage() { return this.magicdamage; }
     public String getMagicType() { return this.magictype; }
-    public int getMatClass() { return this.matclass; }
-    public int getTypeClass() { return this.typeclass; }
     public boolean isTwoHanded() { return this.twohanded; }
     public boolean isRanged() { return this.ranged; }
     public int isMagical() { return this.ismagical; } // 0 = false; 1 = true;
 
-    public int getDefence() { return 0; }
-    public int getMagicDefence() { return 0; }
+    @Override public int getDefence() { return 0; }
+    @Override public int getMagicDefence() { return 0; }
 
     public Weapon(String name, int level, String material, String type, int weight, int damage, int magicdamage, String magictype, boolean twohanded, boolean ranged, boolean ismagical) {
-        this.level = level;
+        makeWeapon(true);
+        setLevel(level);
         this.material = material;
         this.type = type;
         this.weight = weight;
@@ -52,23 +36,16 @@ public class Weapon extends Item {
         if(ismagical == true){
             this.ismagical = 1;
         }
+        assignAttacks();
         setWeaponName(name);
-        makeWeapon(true);
     }
-    public void setWeaponName(String name){
-        if (name == "no" || name == "false" || name == "none" || name == " " || name == ""){
-            if(this.ismagical == 1){
-                this.name = this.material + " " + this.magictype + " " + this.type;
-            } else {
-                this.name = this.material + " " + this.type;
-            }
-        } else { this.name = name; }
-    }
+
     //Get random weapon based on level
     public Weapon(int level, String name){
-        this.level = level;
-        Material mat = new Material(level, checkItemType());
-        setRandomType();
+        makeWeapon(true);
+        setLevel(level);
+        setMaterial(level);
+        generateWeaponType();
         if(this.ismagical == 2){ //ismagical = undecided
             int decideifmagical = rd.nextInt(100);
             if(decideifmagical <= 70){
@@ -78,10 +55,19 @@ public class Weapon extends Item {
         if(this.ismagical == 1){ //ismagical = true
             setMagicType(rd.nextInt(getMagicTypeLength() - 1));
         }
-        makeWeapon(true);
         setWeaponName(name);
         setDamage();
         setMagicDamage();
+    }
+
+    public void setWeaponName(String name){
+        if (name == "no" || name == "false" || name == "none" || name == " " || name == ""){
+            if(this.ismagical == 1){
+                this.name = this.material + " " + this.magictype + " " + this.type;
+            } else {
+                this.name = this.material + " " + this.type;
+            }
+        } else { this.name = name; }
     }
 
     void setDamage(){
@@ -173,7 +159,7 @@ public class Weapon extends Item {
     int getHighTypeLength(){ return 10; }
     int getHighestTypeLength(){ return 10; }
 
-    void setType(int weaponpool, int position){
+    void setWeaponType(int weaponpool, int position){
         int numberofattributes = 7;
         //[0] = String name; [1] = boolean twohanded; [2] = boolean ranged; [3] = magic(true,false,undecided); [4] = int weight; [5] = double magicmultiplier [6] = double damagemultiplier
 
@@ -284,7 +270,7 @@ public class Weapon extends Item {
                 hightype[3][1] = "True"; //twohanded
                 hightype[3][2] = "True"; //ranged
                 hightype[3][4] = "50"; //weight
-        hightype[4][0] = "BASTARD SWORT";
+        hightype[4][0] = "BASTARD SWORD";
                 hightype[4][1] = "True"; //twohanded
                 hightype[4][4] = "40"; //weight
         hightype[5][0] = "FALCHION";
@@ -361,74 +347,31 @@ public class Weapon extends Item {
             assignTypeValues(highesttype, position);
         }
     }
-    void setRandomType(){
+    void generateWeaponType(){
         double percent = rd.nextDouble();
-        int weaponpool = 0;
-        //Select which pool to pick a random weapon from; percentages determined based on material class
-        switch(this.matclass){
-            case 0:
-                weaponpool = 0;
-                break;
-            case 1:
-                if(percent <= 0.5){
-                    weaponpool = 0;
-                } else if (percent <= 0.8){
-                    weaponpool = 1;
-                } else if (percent <= 1.0) {
-                    weaponpool = 2;
-                } break;
-            case 2:
-                if(percent <= 0.05){
-                    weaponpool = 0;
-                } else if (percent <= 0.3){
-                    weaponpool = 1;
-                } else if (percent <= 0.8){
-                    weaponpool = 2;
-                } else if (percent <= 1.0){
-                    weaponpool = 3;
-                } break;
-            case 3:
-                if(percent <= 0.3){
-                    weaponpool = 1;
-                } else if (percent <= 0.6){
-                    weaponpool = 2;
-                } else if (percent <= 0.95){
-                    weaponpool = 3;
-                } else if (percent <= 1.0){
-                    weaponpool = 4;
-                } break;
-            case 4:
-                if(percent <= 0.5){
-                    weaponpool = 2;
-                } else if (percent <= 0.9){
-                    weaponpool = 3;
-                } else if (percent <= 1.0){
-                    weaponpool = 4;
-                }
-        }
-
+        int weaponpool = getRandomTypePool();
         //Pick a random weapon within weaponpool
         int random;
         switch(weaponpool){
             case 0:
                 random = rd.nextInt(getLowestTypeLength() - 1);
-                setType(0, random);
+                setWeaponType(0, random);
                 break;
             case 1:
                 random = rd.nextInt(getLowTypeLength() - 1);
-                setType(1, random);
+                setWeaponType(1, random);
                 break;
             case 2:
                 random = rd.nextInt(getMidTypeLength() - 1);
-                setType(2, random);
+                setWeaponType(2, random);
                 break;
             case 3:
                 random = rd.nextInt(getHighTypeLength() - 1);
-                setType(3, random);
+                setWeaponType(3, random);
                 break;
             case 4:
                 random = rd.nextInt(getHighestTypeLength() - 1);
-                setType(4, random);
+                setWeaponType(4, random);
         }
     }
     void assignTypeValues(String[][] type, int position){
@@ -462,5 +405,163 @@ public class Weapon extends Item {
         } else {
             this.damagemultiplier += Double.parseDouble(type[position][6]);
         }
+        assignAttacks();
+    }
+
+
+    ArrayList<String> attacks = new ArrayList<String>();
+    ArrayList<Integer> NRGY = new ArrayList<Integer>();
+    public boolean checkAttackIndex(int ix){
+        if (attacks.get(ix) != null){
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public String getAttackName(int ix, boolean layout){
+        String display;
+        if(layout){
+            display = "           [" + (ix + 1) + "] ";
+            if(attacks.size() < ix + 1){
+                display += "<...>";
+            } else {
+                display += attacks.get(ix) + " (" + getAttackNRGY(ix) + " NRGY)";
+            }
+            int spaces = 50 - display.length();
+            for(int i = 0; i < spaces; i++){
+                display += " ";
+            }
+        } else {
+            if(attacks.size() < ix + 1){
+                display = "<...>";
+            } else {
+                display = attacks.get(ix);
+            }
+        }
+        return display;
+    }
+    public int getAttackNRGY(int ix){
+        if(NRGY.size() < ix - 1){
+            return 0;
+        } else {
+            return NRGY.get(ix);
+        }
+    }
+
+    void assignAttacks(){
+        String[] CutChargeSliceSTR = { "SHORT SWORD", "LONG SWORD", "BROADSWORD", "GREATSWORD", "BASTARD SWORD", "EXCALIBUR" };
+        String[] CutChargeSliceDEXRogue = { "KATANA", "SCIMITAR", "FALCHION", "SOULSWORD" };
+        String[] PokeStabThrustDEXRogue = { "DAGGER", "KNIFE", "RAPIER", "KUKRI", "BLACKBLADE" };
+        String[] PokeStabThrustSTRWarrior = { "SPEAR", "HALBERT" };
+        String[] StrikeBeatSmiteSTRWarrior = { "CLUB", "LIGHT HAMMER", "LIGHT MACE", "HAND AXE", "GREATAXE", "HEAVY MACE", "WARAXE", "GREAT MACE", "MAUL", "GREAT MACE", "WARHAMMER" };
+        String[] magicweapons = { "ROD", "WAND", "QUARTERSTAFF", "STAFF", "GREATSTAFF" };
+
+        int low = 150;
+        int mid = 200;
+        int high = 250;
+
+        if(this.isRanged()){  // weapon = ranged
+            attacks.add("SHOOT");
+            if(PlayerCharacter.getDexterity() < low){
+                addAttack("SHOOT", 2);
+            } else if(PlayerCharacter.getDexterity() < mid){
+                addAttack("SHOOT", 2);
+                addAttack("FIRE", 4);
+            } else if(PlayerCharacter.getDexterity() < high){
+                addAttack("SHOOT", 2);
+                addAttack("FIRE", 4);
+                addAttack("BLAST", 8);
+                if(PlayerCharacter.getClassmode() == "Ranger"){
+                    addAttack("BOMBARD", 16);
+                }
+            }
+        } else if(Arrays.stream(CutChargeSliceSTR).anyMatch(this.type::equals)){ // CUT/CHARGE/SLICE - STR
+            if(PlayerCharacter.getStrength() < low){
+                addAttack("CUT", 2);
+            } else if(PlayerCharacter.getStrength() < mid){
+                addAttack("CUT", 2);
+                addAttack("CHARGE", 4);
+            } else if(PlayerCharacter.getDexterity() < high) {
+                addAttack("CUT", 2);
+                addAttack("CHARGE", 4);
+                addAttack("SLICE", 8);
+            }
+        } else if(Arrays.stream(CutChargeSliceDEXRogue).anyMatch(this.type::equals)){ // CUT/CHARGE/SLICE/ASSAULT - DEX Rogue
+            if(PlayerCharacter.getStrength() < low){
+                addAttack("CUT", 2);
+            } else if(PlayerCharacter.getStrength() < mid){
+                addAttack("CUT", 2);
+                addAttack("CHARGE", 4);
+            } else if(PlayerCharacter.getDexterity() < high) {
+                addAttack("CUT", 2);
+                addAttack("CHARGE", 4);
+                addAttack("SLICE", 8);
+                if(PlayerCharacter.getClassmode() == "Rogue"){
+                    addAttack("ASSAULT", 16);
+                }
+            }
+        } else if(Arrays.stream(PokeStabThrustDEXRogue).anyMatch(this.type::equals)) { // POKE/STAB/THRUST/PIERCE - DEX Rogue
+            if(PlayerCharacter.getStrength() < low){
+                addAttack("POKE", 2);
+            } else if(PlayerCharacter.getStrength() < mid){
+                addAttack("POKE", 2);
+                addAttack("STAB", 4);
+            } else if(PlayerCharacter.getDexterity() < high) {
+                addAttack("POKE", 2);
+                addAttack("STAB", 4);
+                addAttack("THRUST", 8);
+                if(PlayerCharacter.getClassmode() == "Rogue"){
+                    addAttack("PIERCE", 16);
+                }
+            }
+        } else if(Arrays.stream(PokeStabThrustSTRWarrior).anyMatch(this.type::equals)) { // POKE/STAB/THRUST/PLOW - STR Warrior
+            if(PlayerCharacter.getStrength() < low){
+                addAttack("POKE", 2);
+            } else if(PlayerCharacter.getStrength() < mid){
+                addAttack("POKE", 2);
+                addAttack("STAB", 4);
+            } else if(PlayerCharacter.getDexterity() < high) {
+                addAttack("POKE", 2);
+                addAttack("STAB", 4);
+                addAttack("THRUST", 8);
+                if(PlayerCharacter.getClassmode() == "Warrior"){
+                    addAttack("PLOW", 16);
+                }
+            }
+        } else if(Arrays.stream(StrikeBeatSmiteSTRWarrior).anyMatch(this.type::equals)) { // STRIKE/BEAT/SMITE/CRUSH - STR Warrior
+            if(PlayerCharacter.getStrength() < low){
+                addAttack("STRIKE", 2);
+            } else if(PlayerCharacter.getStrength() < mid){
+                addAttack("STRIKE", 2);
+                addAttack("BEAT", 4);
+            } else if(PlayerCharacter.getDexterity() < high) {
+                addAttack("STRIKE", 2);
+                addAttack("BEAT", 4);
+                addAttack("SMITE", 8);
+                if(PlayerCharacter.getClassmode() == "Warrior"){
+                    addAttack("CRUSH", 16);
+                }
+            }
+        } else if(this.type == "STICK"){  // weapon = stick
+            addAttack("STRIKE", 2);
+            System.out.println("WOODEN STICK ATTACK = " + attacks.get(0));
+        } else if(this.isMagical() == 1){
+            // alle magische shit uitwerken
+        }
+    }
+
+    void addAttack(String attack, int cost){
+        if(attacks.size() < 1){
+            attacks.add(attack); NRGY.add(cost);
+        } else {
+            for(int i = 0; i < attacks.size(); i++){
+                if(attacks.get(i) == attack){
+                    break;
+                } else {
+                    attacks.add(attack); NRGY.add(cost);
+                }
+            }
+        }
+
     }
 }

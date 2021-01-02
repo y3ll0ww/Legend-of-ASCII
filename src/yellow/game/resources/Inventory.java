@@ -1,6 +1,7 @@
 package yellow.game.resources;
 
 import yellow.game.gui.LayoutPicker;
+import yellow.game.resources.objects.Head;
 import yellow.game.resources.objects.Item;
 import yellow.game.resources.objects.PlayerCharacter;
 import yellow.game.resources.objects.Weapon;
@@ -45,15 +46,18 @@ public class Inventory {
 
     public static String showItemInEquipment(int slot){
         String information = "<none>";
+        int magicdamordef;
         if(Equipment[slot] != null){
             information = Equipment[slot].getName() + " (LVL " + Equipment[slot].getLevel() + ")";
             if(Equipment[slot].isWeapon()){
                 information += " " + Equipment[slot].getDamage() + " DMG";
+                magicdamordef = Equipment[slot].getMagicDamage();
             } else {
-                information += " | " + Equipment[slot].getDefence() + "DEF";
+                information += " " + Equipment[slot].getDefence() + " DEF";
+                magicdamordef = Equipment[slot].getMagicDefence();
             }
             if(Equipment[slot].isMagical() == 1){
-                information += " | " + Equipment[slot].getMagicDamage() + " " + Equipment[slot].getMagicType();
+                information += " | " + magicdamordef + " " + Equipment[slot].getMagicType();
             }
             information += " | " + Equipment[slot].getWeight() + " WGHT";
         }
@@ -73,7 +77,7 @@ public class Inventory {
         String spaces = " ";
         if(Supplies[slot] != null){
             information = Supplies[slot].getName();
-            if(Supplies[slot].isWeapon()){
+            if(Supplies[slot].isWeapon() || Supplies[slot].isHead()){
                 information += " (LVL " + Supplies[slot].getLevel() + ")";
             }
             information += " " + Supplies[slot].getWeight() + " WGHT";
@@ -162,6 +166,11 @@ public class Inventory {
                 }
                 if(Holding[0].isRanged()){
                     information += " | RANGED";
+                }
+            } else if(Holding[0].isHead()){
+                information += Holding[0].getDefence() + " DEF";
+                if(Holding[0].isMagical() == 1){
+                    information += " | " + Holding[0].getMagicDefence() + " MGC";
                 }
             }
             information += " | " + Holding[0].getWeight() + " WGHT";
@@ -370,6 +379,28 @@ public class Inventory {
             setTotalWeight(totalweight += x.getWeight());
         }
     }
+
+    ///////////HEAD GEAR
+    public static void addHeadToEmptySlot(Head x, int returnentry) { //What to do if there is no room in inventory  ???
+        if (totalweight + x.getWeight() > PlayerCharacter.getStrength()) {
+            Holding[0] = x;
+            errormessage = "This item is to heavy. Switch it with a different item or drop it. (WEIGHT: " + x.getWeight() + ")";
+            enterInventory(returnentry, 9983); //Equip item failure
+        } else {
+            if (Equipment[2] == null) {
+                Equipment[2] = x;
+            } else {
+                for (int i = 0; i < Supplies.length; i++) {
+                    if (Supplies[i] == null) {
+                        Supplies[i] = x;
+                        break;
+                    }
+                }
+            }
+            setTotalWeight(totalweight += x.getWeight());
+        }
+    }
+
 
     int getWeaponDamage(){
         int index = Equipment.length;

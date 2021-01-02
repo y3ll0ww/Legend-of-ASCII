@@ -18,6 +18,8 @@ public class LayoutPicker {
             Layouts.characterCreation();
         } else if(entry >= 50 && entry <= 70) {
             Layouts.introStory();
+        } else if(entry >= 9960 && entry < 9970){
+            Layouts.battleMode();
         } else if(entry >= 9970 && entry < 9980){
             Layouts.LootBox();
         } else if(entry >= 9980 && entry < 9990){

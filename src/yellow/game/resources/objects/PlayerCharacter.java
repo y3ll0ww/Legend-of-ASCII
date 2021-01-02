@@ -25,6 +25,10 @@ public class PlayerCharacter {
     public static void setLevel(){ level++; }
     public static void setXP(int add){ XP += add; }
 
+    //Initiative
+    public static double initiative = 1.5;
+    public static void setInitiative(double ini){ initiative = ini; }
+    public static double getInitiative(){ return initiative; }
 
     public static void setGender(String gender){
         PlayerCharacter.gender[0] = gender;
@@ -184,6 +188,15 @@ public class PlayerCharacter {
     public static int getEndurance(){ return endurance; }
     public static int getMagic(){ return magic; }
 
+    public static void setHP(int change){
+        if(HP + change > maxHP){
+            HP = maxHP;
+        } else if(HP + change < 0){
+            HP = 0;
+        } else {
+            HP += change;
+        }
+    }
     public static void setEnergy(int change){
         int newenergy;
         if(energy + change > maxenergy){
