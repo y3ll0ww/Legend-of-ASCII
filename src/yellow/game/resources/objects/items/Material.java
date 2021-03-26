@@ -1,4 +1,4 @@
-package yellow.game.resources.objects;
+package yellow.game.resources.objects.items;
 
 import java.util.Random;
 

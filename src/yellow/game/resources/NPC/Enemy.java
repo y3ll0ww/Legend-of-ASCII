@@ -14,9 +14,12 @@ public class Enemy {
     static int life; public static int getLife(){ return life; }
     static int damage; public static int getDamage(){ return damage; }
     static int defence; public static int getDefence(){ return defence; }
-    static int magicdamage;
-    static int magicdefence;
-    static double escapeprevention; public static double getEscapePrevention(){ return escapeprevention; }
+    static int magicdamage; public static int getMagicDamage(){ return magicdamage; }
+    static int magicdefence; public static int getMagicDefence(){ return magicdefence; }
+    static double escapeprevention;
+    static double lootchance;
+    public static double getEscapePrevention(){ return escapeprevention; }
+    public static double getLootChance(){ return lootchance; }
 
     public static void takesDamage(int damage){
         life -= damage;
@@ -25,7 +28,7 @@ public class Enemy {
         }
     }
 
-    public Enemy(int avatar, String name, int level, int health, int damage, int defence, int magicdamage, int magicdefence, double escapeprevention){
+    public Enemy(int avatar, String name, int level, int health, int damage, int defence, int magicdamage, int magicdefence, double escapeprevention, double lootchance){
         Avatar.setAvatar(avatar);
         this.name = name;
         this.level = level;
@@ -36,6 +39,7 @@ public class Enemy {
         this.magicdamage = magicdamage;
         this.magicdefence = magicdefence;
         this.escapeprevention = escapeprevention;
+        this.lootchance = lootchance;
     }
 
     public Enemy(String terrain){
@@ -101,6 +105,7 @@ public class Enemy {
                 this.magicdamage = 0;
                 this.magicdefence = 0;
                 this.escapeprevention = 0.5;
+                this.lootchance = 0.6;
                 break;
             case 1:
                 this.name =  "WIZARD";
@@ -111,6 +116,7 @@ public class Enemy {
                 this.magicdamage = (int)Math.round(level * 7.8);
                 this.magicdefence = (int)Math.round(level * 8.3);
                 this.escapeprevention = 0.3;
+                this.lootchance = 0.7;
                 break;
             case 2:
                 this.name = "IMPERIAL KNIGHT";
@@ -121,6 +127,7 @@ public class Enemy {
                 this.magicdamage = 0;
                 this.magicdefence = level * 2;
                 this.escapeprevention = 0.3;
+                this.lootchance = 0.9;
                 break;
             case 3:
                 this.name = "WOOD ELF";
@@ -131,6 +138,7 @@ public class Enemy {
                 this.magicdamage = level * 6;
                 this.magicdefence = (int)Math.round(level * 4.7);
                 this.escapeprevention = 0.4;
+                this.lootchance = 0.7;
                 break;
             case 4:
                 this.name = "ORC WARRIOR";
@@ -141,6 +149,7 @@ public class Enemy {
                 this.magicdamage = 0;
                 this.magicdefence = 0;
                 this.escapeprevention = 0.4;
+                this.lootchance = 0.8;
                 break;
             case 5:
             case 6:
@@ -152,6 +161,7 @@ public class Enemy {
                 this.magicdamage = 0;
                 this.magicdefence = 0;
                 this.escapeprevention = 0.9;
+                this.lootchance = 0.2;
                 break;
             case 7:
                 this.name = "EAGLE";
@@ -162,6 +172,7 @@ public class Enemy {
                 this.magicdamage = 0;
                 this.magicdefence = 0;
                 this.escapeprevention = 0.8;
+                this.lootchance = 0.3;
                 break;
             case 8:
                 this.name = "TIGER";
@@ -172,6 +183,7 @@ public class Enemy {
                 this.magicdamage = 0;
                 this.magicdefence = 0;
                 this.escapeprevention = 0.3;
+                this.lootchance = 0.4;
                 break;
             case 9:
                 this.name = "MOUNTAIN LION";
@@ -182,6 +194,7 @@ public class Enemy {
                 this.magicdamage = 0;
                 this.magicdefence = 0;
                 this.escapeprevention = 0.3;
+                this.lootchance = 0.4;
                 break;
             case 10:
                 this.name = "TAZMANIAN DEVIL";
@@ -192,6 +205,7 @@ public class Enemy {
                 this.magicdamage = 0;
                 this.magicdefence = 0;
                 this.escapeprevention = 0.7;
+                this.lootchance = 0.3;
                 break;
             case 11:
                 this.name = "RHINOCEROS";
@@ -202,6 +216,7 @@ public class Enemy {
                 this.magicdamage = 0;
                 this.magicdefence = 0;
                 this.escapeprevention = 0.7;
+                this.lootchance = 0.3;
                 break;
             case 12:
                 this.name = "SCORPION";
@@ -212,6 +227,7 @@ public class Enemy {
                 this.magicdamage = 0;
                 this.magicdefence = 0;
                 this.escapeprevention = 0.9;
+                this.lootchance = 0.2;
                 break;
             case 13:
                 this.name = "TARANTULA";
@@ -222,6 +238,7 @@ public class Enemy {
                 this.magicdamage = 0;
                 this.magicdefence = 0;
                 this.escapeprevention = 0.9;
+                this.lootchance = 0.2;
                 break;
             case 14:
                 this.name = "WOLF";
@@ -232,6 +249,7 @@ public class Enemy {
                 this.magicdamage = 0;
                 this.magicdefence = 0;
                 this.escapeprevention = 0.7;
+                this.lootchance = 0.4;
                 break;
             case 15:
                 this.name = "DUSKBEAST";
@@ -242,6 +260,7 @@ public class Enemy {
                 this.magicdamage = 0;
                 this.magicdefence = 0;
                 this.escapeprevention = 0.4;
+                this.lootchance = 0.8;
                 break;
         }
         this.life = this.health;

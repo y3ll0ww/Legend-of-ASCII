@@ -2,10 +2,11 @@ package yellow.game.gui;
 
 import yellow.game.resources.Inventory;
 import yellow.game.resources.LootBox;
+import yellow.game.resources.NPC.Enemy;
 import yellow.game.resources.objects.PlayerCharacter;
 import yellow.game.resources.objects.Map;
 import yellow.game.resources.BattleMode;
-import yellow.game.resources.objects.Weapon;
+import yellow.game.resources.objects.items.Weapon;
 
 public class CommandList {
     public static void TestEnvironment(String input){
@@ -67,7 +68,7 @@ public class CommandList {
                     Inventory.selectItem(1, 0);
                     next = 9981;
                 } else if(LayoutPicker.entry >= 9982 && LayoutPicker.entry <= 9984) { //Holding item in hand
-                    Inventory.switchOrPlaceItem(1, 0);
+                    Inventory.addItem(1, 0);
                     next = Inventory.getNextEntry();
                 } break;
             case "B":
@@ -75,7 +76,7 @@ public class CommandList {
                     Inventory.selectItem(1, 1);
                     next = 9981;
                 } else if(LayoutPicker.entry >= 9982 && LayoutPicker.entry <= 9984) { //Holding item in hand
-                    Inventory.switchOrPlaceItem(1, 1);
+                    Inventory.addItem(1, 1);
                     next = Inventory.getNextEntry();
                 } break;
             case "C":
@@ -83,7 +84,7 @@ public class CommandList {
                     Inventory.selectItem(1, 2);
                     next = 9981;
                 } else if(LayoutPicker.entry >= 9982 && LayoutPicker.entry <= 9984) { //Holding item in hand
-                    Inventory.switchOrPlaceItem(1, 2);
+                    Inventory.addItem(1, 2);
                     next = Inventory.getNextEntry();
                 } break;
             case "D":
@@ -91,7 +92,7 @@ public class CommandList {
                     Inventory.selectItem(1, 3);
                     next = 9981;
                 } else if(LayoutPicker.entry >= 9982 && LayoutPicker.entry <= 9984) { //Holding item in hand
-                    Inventory.switchOrPlaceItem(1, 3);
+                    Inventory.addItem(1, 3);
                     next = Inventory.getNextEntry();
                 } break;
             case "E":
@@ -99,12 +100,14 @@ public class CommandList {
                     Inventory.selectItem(1, 4);
                     next = 9981;
                 } else if(LayoutPicker.entry >= 9982 && LayoutPicker.entry <= 9984) { //Holding item in hand
-                    Inventory.switchOrPlaceItem(1, 4);
+                    Inventory.addItem(1, 4);
                     next = Inventory.getNextEntry();
                 } break;
             case "H": // Hold item in hand
                 if(LayoutPicker.entry == 9981){ // Show item details
                     Inventory.dropItem(Inventory.thislocation, Inventory.thisslot);
+                    next = 9982;
+                } else if(LayoutPicker.entry == 9982){
                     next = 9982;
                 } break;
             case "DROP":
@@ -124,15 +127,22 @@ public class CommandList {
                     System.out.println(LayoutPicker.entry);
                 } break;
             default: //Supply slots
-                if(Integer.valueOf(input) <= 30){
-                    if(LayoutPicker.entry == 9980 || LayoutPicker.entry == 9981){ // Start inventory
-                        Inventory.selectItem(2, Integer.valueOf(input) - 1);
-                        next = 9981;
-                    } else if(LayoutPicker.entry >= 9982 && LayoutPicker.entry <= 9984) { //Holding item in hand
-                        Inventory.switchOrPlaceItem(2, Integer.valueOf(input) - 1);
-                        next = Inventory.getNextEntry();
-                    } break;
+                try {
+                    if(Integer.valueOf(input) <= 30){
+                        if(LayoutPicker.entry == 9980 || LayoutPicker.entry == 9981){ // Start inventory
+                            Inventory.selectItem(2, Integer.valueOf(input) - 1);
+                            next = 9981;
+                        } else if(LayoutPicker.entry >= 9982 && LayoutPicker.entry <= 9984) { //Holding item in hand
+                            Inventory.addItem(2, Integer.valueOf(input) - 1);
+                            next = Inventory.getNextEntry();
+                        }
+                    }
+                } catch (NumberFormatException nfe){
+                    if(LayoutPicker.entry == 9982){
+                        next = 9982;
+                    }
                 }
+                break;
         }
         LayoutPicker.entry = next;
         LayoutPicker.browseLayout();
@@ -146,7 +156,7 @@ public class CommandList {
                 case "EXIT":
                     next = 1;
                     break;
-                case "CONTINUE":
+                case "GO":
                     next = 11;
             }
         } else if(LayoutPicker.entry == 11){ // Choose GENDER
@@ -270,7 +280,7 @@ public class CommandList {
             }
         } else if(LayoutPicker.entry == 19){ //CONFIRM choices
             switch(input){
-                case "CONFIRM":
+                case "GO":
                     PlayerCharacter.initializeCharacterStats();
                     PlayerCharacter.setFather(PlayerCharacter.getRace(0), PlayerCharacter.getRegion(0));
                     System.out.println(PlayerCharacter.getGender(0) + PlayerCharacter.getRace(0) + PlayerCharacter.getClassmode() + PlayerCharacter.getRegion(0));
@@ -301,14 +311,17 @@ public class CommandList {
                 if(LayoutPicker.entry == 65 || LayoutPicker.entry == 66){
                     LayoutPicker.entry = 67;
                 } else if(LayoutPicker.entry == 69){
-                    //Go to BATTLE MODE qwerty
-                    //new BattleMode();
-                    //LayoutPicker.entry = 2000;
+                    AudioPlayer.playSound("battlemode.wav", false);
+                    Map.initiateMap();
+                    Map.movePossibilities();
+                    Map.setDisplayInformation('X');
+                    Enemy guard = new Enemy(0, "ODDBJØRG GUARD", 1, 17, 10, 10, 0, 0, 0.3, 1);
+                    new BattleMode(0, 9990, Enemy.getName() + " has spotted you and is attacking!", "");
                 }
                 LayoutPicker.browseLayout();
                 break;
             case "2":
-                if(LayoutPicker.entry == 65){  // ADD WOODEN STICK TO EQUIPMENT qwerty
+                if(LayoutPicker.entry == 65){
                     LayoutPicker.entry = 66;
                     boolean biglog = false;
                     int extraDMG = 0;
@@ -319,7 +332,7 @@ public class CommandList {
                         extraWGT += 5; }
                     if(PlayerCharacter.getClassmode() == "warrior"){
                         extraDMG += 10; }
-                    Weapon WoodenStick = new Weapon("no", 1, "WOODEN", "STICK", 5 + extraWGT, 10 + extraDMG, 0, "NONE", biglog, false, false);
+                    Weapon WoodenStick = new Weapon("no", 1, "WOODEN", "STICK", 5 + extraWGT, 10 + extraDMG, 0, "NONE", biglog, false, false, 0, "STRIKE", null, null);
                     if(PlayerCharacter.getRace(1) == "Orc"){
                         WoodenStick.setName("WOODEN LOG");
                     }
@@ -370,7 +383,7 @@ public class CommandList {
             case "EXIT":
                 if(LayoutPicker.entry == 9991){
                     LayoutPicker.entry = 9990;
-                } else {
+                } else if(LayoutPicker.entry != 9990) { // Prevention of crash: @ freeraoming going to entry 0 when "EXIT"
                     Inventory.returnToGame();
                 }
         }
@@ -407,19 +420,49 @@ public class CommandList {
     }
 
     public static void battleMode(String input){
-
         switch(input){
+            case "OK":
+                if(LayoutPicker.entry == 9960){
+                    if(BattleMode.getPlayerGoesFirst()){
+                        LayoutPicker.entry = 9961;
+                    } else {
+                        LayoutPicker.entry = 9965;
+                    }
+                }
+                break;
             case "1":
             case "2":
             case "3":
             case "4":
                 if(LayoutPicker.entry == 9961){
-                    BattleMode.doDamage(Integer.parseInt(input) - 1);
+                    if(BattleMode.displayAttack(Integer.parseInt(input) - 1).contains("<...>")){
+                        LayoutPicker.entry = 9961;
+                    } else {
+                        //System.out.println(Integer.parseInt(input) - 1);
+                        BattleMode.doDamage(Integer.parseInt(input) - 1);
+                        LayoutPicker.entry = 9962;
+                    }
+                }
+                break;
+            case "I":
+                if(LayoutPicker.entry == 9961) {
+                    if(PlayerCharacter.getClassmode() == "rogue"){
+                        Inventory.enterInventory(9961, 9980);
+                    } else {
+                        BattleMode.setDisplayInfo("   You've lost your turn to inventory management.");
+                        Inventory.enterInventory(9962, 9980);
+                    }
+                }
+                break;
+            case "R":
+                if(LayoutPicker.entry == 9961){
+                    PlayerCharacter.setEnergy(PlayerCharacter.getEnergy() + 5);
+                    BattleMode.setDisplayInfo("   You gathered yourself and regenerated 5 energy points.");
                     LayoutPicker.entry = 9962;
                 }
                 break;
             case "E":
-                if(LayoutPicker.entry == 9961){
+                if(LayoutPicker.entry == 9960 || LayoutPicker.entry == 9961){
                     if(BattleMode.tryEscape()){
                         Map.setDisplayInformation("You've succesfully escaped the fight.");
                         LayoutPicker.entry = BattleMode.getEnterEntry();
@@ -443,16 +486,12 @@ public class CommandList {
                     LayoutPicker.entry = BattleMode.getEnterEntry();
                 }
             default:
-                if(LayoutPicker.entry == 9960 && BattleMode.getPlayerGoesFirst()){
-                    LayoutPicker.entry = 9961;
-                } else if(LayoutPicker.entry == 9960 && !BattleMode.getPlayerGoesFirst()) {
-                    //BattleMode(enemydoesattack);
-                    LayoutPicker.entry = 9965;
-                } else if(LayoutPicker.entry == 9962) { // Player has attacked
-                    if (!BattleMode.enemyDied()) {
-                        LayoutPicker.entry = 9965;
-                    } else {
+                if(LayoutPicker.entry == 9962) { // Player has attacked
+                    if (BattleMode.enemyDied()) {
+                        BattleMode.setDisplayInfo("   + " + BattleMode.addEnemyXP() + " XP");
                         LayoutPicker.entry = 9963;
+                    } else {
+                        LayoutPicker.entry = 9965;
                     }
                 } else if(LayoutPicker.entry == 9963){ // Player killed the enemy
                     BattleMode.generateLoot();

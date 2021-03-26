@@ -1,4 +1,6 @@
-package yellow.game.resources.objects;
+package yellow.game.resources.objects.items;
+
+import yellow.game.resources.objects.PlayerCharacter;
 
 public class Head extends Item {
     @Override public int getDamage() { return 0; }
@@ -6,6 +8,7 @@ public class Head extends Item {
     @Override public String getMagicType() { return "MGC"; }
     @Override public boolean isTwoHanded() { return false; }
     @Override public boolean isRanged() { return false; }
+    @Override public Attack getAttacks() { return null; }
     @Override public String getAttackName(int ix, boolean layout) { return null; }
     @Override public int getAttackNRGY(int attack) { return 0; }
 

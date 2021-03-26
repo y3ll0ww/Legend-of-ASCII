@@ -1,40 +1,46 @@
-package yellow.game.resources.objects;
+package yellow.game.resources.objects.items;
 
 import java.util.Random;
 
 public abstract class Item {
-    String name;
-    int level;
-    Random rd = new Random();
+    public String name;
+    public int level;
+    public Random rd = new Random();
 
-    static String material;
-    int matclass;
-    int weight;
-    static double magicmultiplier;
-    static double damagemultiplier;
-    static double defencemultiplier;
-    String type;
-    int typeclass;
-    String magictype;
+    public static String material;
+    public int matclass;
+    public int weight;
+    public static double magicmultiplier;
+    public static double damagemultiplier;
+    public static double defencemultiplier;
+    public String type;
+    public int typeclass;
+    public String magictype;
 
     boolean weapon;
     boolean shield;
     boolean head;
     boolean armor;
     boolean feet;
-    boolean slotOccupied = true;
+    boolean potion;
 
-    void makeWeapon(boolean set){ this.weapon = set; }
-    void makeShield(boolean set){ this.shield = set; }
-    void makeHead(boolean set){ this.head = set; }
-    void makeArmor(boolean set){ this.armor = set; }
-    void makeFeet(boolean set){ this.feet = set; }
+    public void makeWeapon(boolean set){ this.weapon = set; }
+    public void makeShield(boolean set){ this.shield = set; }
+    public void makeHead(boolean set){ this.head = set; }
+    public void makeArmor(boolean set){ this.armor = set; }
+    public void makeFeet(boolean set){ this.feet = set; }
+    public void makePotion(boolean set){ this.potion = set; }
 
     public boolean isWeapon(){ return this.weapon; }
     boolean isShield(){ return this.shield; }
     public boolean isHead(){ return this.head; }
     boolean isArmor(){ return this.armor; }
     boolean isFeet(){ return this.feet; }
+
+    String[] audiofiles = new String[5];
+    public void setAudioFile(int ix, String file){
+        audiofiles[ix] = file;
+    }
 
     String checkItemType(){
         if(isWeapon()){ return "Weapon"; }
@@ -46,14 +52,14 @@ public abstract class Item {
     }
     public void setName(String name){ this.name = name; }
     public void setLevel(int level){ this.level = level; }
-    void setMaterial(int level){
+    public void setMaterial(int level){
         Material apply = new Material(level);
         material = apply.mat[0];
         weight = Integer.valueOf(apply.mat[1]);
         magicmultiplier = Double.valueOf(apply.mat[2]);
         damagemultiplier = Double.valueOf(apply.mat[3]);
     }
-    int getRandomTypePool() {
+    public int getRandomTypePool() {
         double percent = rd.nextDouble();
         int pool = 0;
         //Select which pool to pick a random weapon from; percentages determined based on material class
@@ -128,6 +134,7 @@ public abstract class Item {
     public abstract boolean isRanged();
     public abstract String getAttackName(int ix, boolean layout);
     public abstract int getAttackNRGY(int attack);
+    public abstract Attack getAttacks();
     /////////// OTHERS
     public abstract int getDefence();
     public abstract int getMagicDefence();

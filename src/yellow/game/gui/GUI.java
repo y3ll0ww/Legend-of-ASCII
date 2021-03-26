@@ -12,11 +12,15 @@ import yellow.game.Main;
 import static yellow.game.gui.ScreenDrawer.*;
 
 public class GUI extends JPanel {
-    Font MonoFont = new Font(Font.MONOSPACED, Font.PLAIN, 18);
-
+    Font MonoFont = new Font(Font.MONOSPACED, Font.PLAIN, 16);
+    JLabel terminal = new JLabel("");
 
     public GUI() {
         this.setFocusable(true);
+        terminal.setForeground(Color.WHITE);
+        terminal.setFont(MonoFont);
+        terminal.setVerticalAlignment(JLabel.CENTER);
+        terminal.setHorizontalAlignment(JLabel.CENTER);
     }
 
     protected void paintComponent(Graphics g) {
@@ -34,20 +38,31 @@ public class GUI extends JPanel {
         g.setFont(MonoFont);
 
         //Draw strings to screen
-        g.drawString(line01, 4, 18);  g.drawString(line02, 4, 36);  g.drawString(line03, 4, 54);
-        g.drawString(line04, 4, 72);  g.drawString(line05, 4, 90);  g.drawString(line06, 4, 108);
-        g.drawString(line07, 4, 126); g.drawString(line08, 4, 144); g.drawString(line09, 4, 162);
-        g.drawString(line10, 4, 180); g.drawString(line11, 4, 198); g.drawString(line12, 4, 216);
-        g.drawString(line13, 4, 234); g.drawString(line14, 4, 252); g.drawString(line15, 4, 270);
-        g.drawString(line16, 4, 288); g.drawString(line17, 4, 306); g.drawString(line18, 4, 324);
-        g.drawString(line19, 4, 342); g.drawString(line20, 4, 360); g.drawString(line21, 4, 378);
-        g.drawString(line22, 4, 396); g.drawString(line23, 4, 414); g.drawString(line24, 4, 432);
-        g.drawString(line25, 4, 450); g.drawString(line26, 4, 468); g.drawString(line27, 4, 486);
-        g.drawString(line28, 4, 504); g.drawString(line29, 4, 522); g.drawString(line30, 4, 540);
-        g.drawString(line31, 4, 558); g.drawString(line32, 4, 576); g.drawString(line33, 4, 594);
-        g.drawString(line34, 4, 612); g.drawString(line35, 4, 630); g.drawString(line36, 4, 648);
-        g.drawString(line37, 4, 666); g.drawString(line38, 4, 684); g.drawString(line39, 4, 702);
-        g.drawString(line40, 4, 720);
+        terminal.setText("<html>" + line01 + "<br>" + line02 + "<br>" + line03 + "<br>" + line04 + "<br>" + line05
+                + "<br>" + line06 + "<br>" + line07 + "<br>" + line08 + "<br>" + line09 + "<br>" + line10 + "<br>"
+                + line11 + "<br>" + line12 + "<br>" + line13 + "<br>" + line14 + "<br>" + line15 + "<br>" + line16
+                + "<br>" + line17 + "<br>" + line18 + "<br>" + line19 + "<br>" + line20 + "<br>" + line21 + "<br>"
+                + line22 + "<br>" + line23 + "<br>" + line24 + "<br>" + line25 + "<br>" + line26 + "<br>" + line27
+                + "<br>" + line28 + "<br>" + line29 + "<br>" + line30 + "<br>" + line31 + "<br>" + line32 + "<br>"
+                + line33 + "<br>" + line34 + "<br>" + line35 + "<br>" + line36 + "<br>" + line37 + "<br>" + line38
+                + "<br>" + line39 + "<br>" + line40 + "</html>");
+        add(terminal);
+
+     //   g.drawString(line01, 4, 18);  g.drawString(line02, 4, 36);  g.drawString(line03, 4, 54);
+     //   g.drawString(line04, 4, 72);  g.drawString(line05, 4, 90);  g.drawString(line06, 4, 108);
+     //   g.drawString(line07, 4, 126); g.drawString(line08, 4, 144); g.drawString(line09, 4, 162);
+     //   g.drawString(line10, 4, 180); g.drawString(line11, 4, 198); g.drawString(line12, 4, 216);
+     //   g.drawString(line13, 4, 234); g.drawString(line14, 4, 252); g.drawString(line15, 4, 270);
+     //   g.drawString(line16, 4, 288); g.drawString(line17, 4, 306); g.drawString(line18, 4, 324);
+     //   g.drawString(line19, 4, 342); g.drawString(line20, 4, 360); g.drawString(line21, 4, 378);
+     //   g.drawString(line22, 4, 396); g.drawString(line23, 4, 414); g.drawString(line24, 4, 432);
+     //   g.drawString(line25, 4, 450); g.drawString(line26, 4, 468); g.drawString(line27, 4, 486);
+     //   g.drawString(line28, 4, 504); g.drawString(line29, 4, 522); g.drawString(line30, 4, 540);
+     //   g.drawString(line31, 4, 558); g.drawString(line32, 4, 576); g.drawString(line33, 4, 594);
+     //   g.drawString(line34, 4, 612); g.drawString(line35, 4, 630); g.drawString(line36, 4, 648);
+     //   g.drawString(line37, 4, 666); g.drawString(line38, 4, 684); g.drawString(line39, 4, 702);
+     //   g.drawString(line40, 4, 720);
+
 
         //Get layout
         LayoutPicker.browseLayout();
@@ -67,6 +82,7 @@ public class GUI extends JPanel {
         //Add it to the bottom of the screen
         this.setLayout(new BorderLayout());
         this.add(commandline, BorderLayout.SOUTH);
+        commandline.setMargin(new Insets(0, 10, 0, 0));
 
         //Send commands to commandlist class
         commandline.addActionListener(new ActionListener(){

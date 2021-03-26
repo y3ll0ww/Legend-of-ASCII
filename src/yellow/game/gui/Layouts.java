@@ -25,9 +25,9 @@ public class Layouts {
                 defineSpacesForInteger(PlayerCharacter.getMP()) + defineSpacesForInteger(PlayerCharacter.getMaxMP()) +
                 defineSpacesForInteger(PlayerCharacter.getEnergy()) + defineSpacesForInteger(PlayerCharacter.getMaxEnergy());
 
-        drawString(line, "   " + PlayerCharacter.getName() + addspaces + statspaces + "HP: " + PlayerCharacter.getHP() +
-                "/" + PlayerCharacter.getMaxHP() + "   MP: " + PlayerCharacter.getMP() + "/" + PlayerCharacter.getMaxMP() +
-                "   Energy: " + PlayerCharacter.getEnergy() + "/" + PlayerCharacter.getMaxEnergy());
+        drawString(line, "   " + PlayerCharacter.getName() + addspaces + statspaces + "<font color='RED'>HP:</font> " + PlayerCharacter.getHP() +
+                "/" + PlayerCharacter.getMaxHP() + "   <font color='DODGERBLUE'>MP:</font> " + PlayerCharacter.getMP() + "/" + PlayerCharacter.getMaxMP() +
+                "   <font color='LIME'>Energy:</font> " + PlayerCharacter.getEnergy() + "/" + PlayerCharacter.getMaxEnergy());
     }
 
     public static String defineSpacesForInteger(int value){
@@ -47,26 +47,26 @@ public class Layouts {
     }
 
     public static void titleScreen() {
-        drawString(6, "                  _____                                        __              ___");
+        drawString(6, "<font color='YELLOW'>                  _____                                        __              ___");
         drawString(7, "                 |_   _|                                      |  ]           .' ..]");
         drawString(8, "                   | |      .---.  .--./) .---.  _ .--.   .--.| |    .--.   _| |_");
         drawString(9, "                   | |   _ / /__\\\\/ /'`\\;/ /__\\\\[ `.-. |/ /'`\\' |  / .'`\\ \\'-| |-'");
         drawString(10, "                  _| |__/ || \\__.,\\ \\._//| \\__., | | | || \\__/  |  | \\__. |  | |");
-        drawString(11, "                 |________| '.__.'.',__`  '.__.'[___||__]'.__.;__] =\\\\\\\\.'  [___]. .");
-        drawString(12, "        ///~`     |\\\\_       _   ( ( __))__     ______  _____  ____,_)  \\      _/_/|");
-        drawString(13, "       ,  |='  ,))\\_| ~-_   / \\    .' ____ \\  .' ___  ||_   _||_   _~~~\\-~-_ /~ (_/\\");
-        drawString(14, "      / ,' ,;((((((    ~ \\ / _ \\   | (___ \\_|/ .'   \\_|  | |    | |     \\_  /'  D   |");
-        drawString(15, "    /' -~/~)))))))'\\_   _/' ___ \\   _.____`. | |         | |    | |       ~-;  /    \\--_");
-        drawString(16, "   (       (((((( ~-/ ~- / /   \\ \\_| \\____) |\\ `.___.'\\ _| |_  _| |_        `~~\\_    \\   )");
-        drawString(17, "    ~~--|   ))''    ') |____| |____|\\______.' `.____ .'|_____||_____|         /~~-     ./");
+        drawString(11, "                 |________| '.__.'.',__`  '.__.'[___||__]'.__.;__] </font>=\\\\\\\\<font color='YELLOW'>.'  [___]</font>. .");
+        drawString(12, "        ///~`     |\\\\_<font color='YELLOW'>       _   ( ( __))__     ______  _____  ____</font>,_)  \\      _/_/|");
+        drawString(13, "       ,  |='  ,))\\_| ~-_<font color='YELLOW'>   / \\    .' ____ \\  .' ___  ||_   _||_   _</font>~~~\\-~-_ /~ (_/\\");
+        drawString(14, "      / ,' ,;((((((    ~ \\<font color='YELLOW'> / _ \\   | (___ \\_|/ .'   \\_|  | |    | |</font>     \\_  /'  D   |");
+        drawString(15, "    /' -~/~)))))))'\\_   _/'<font color='YELLOW'> ___ \\   _.____`. | |         | |    | |</font>       ~-;  /    \\--_");
+        drawString(16, "   (       (((((( ~-/ ~-<font color='YELLOW'> / /   \\ \\_| \\____) |\\ `.___.'\\ _| |_  _| |_</font>        `~~\\_    \\   )");
+        drawString(17, "    ~~--|   ))''    ')<font color='YELLOW'> |____| |____|\\______.' `.____ .'|_____||_____|</font>         /~~-     ./");
         drawString(18, "        :        (_  ~\\           ,                                          |    )    )|");
         drawString(19, "         \\        \\_   )--__  /(_/)                             /,_;,   __--(   _/      |");
         drawString(20, "         |_     \\__/~-__    ~~   ,'       CREATED BY            \\-  ((~~    __-~        |");
         drawString(21, "        /' ~~~----|     ~~~~~~~~'       Jelle van Geel           ``~~ ~~~~~~   \\_      /");
         drawString(22, "       (      _-~~-\\                                                           )       )");
         drawString(23, "       \\     /      \\                                                        _-    ,;;(");
-        drawString(24, "       ;`~--'        :                github.com/y3ll0ww                   _-~    ,;;;;)");
-        drawString(25, "       |    `\\       |     linkedin.com/in/jelle-van-geel-437656120     _-~          _/");
+        drawString(24, "       ;`~--'        :                <font color='GRAY'>github.com/y3ll0ww</font>                   _-~    ,;;;;)");
+        drawString(25, "       |    `\\       |     <font color='GRAY'>linkedin.com/in/jelle-van-geel-437656120</font>     _-~          _/");
         drawString(26, "       |    /'`\\     ;                                                 /;;;''  ,;;:-~");
         drawString(27, "      /~   /    |    )                                                |;;'   ,''");
         drawString(28, "     |    /     / | /                                                 |   ,;(");
@@ -76,13 +76,13 @@ public class Layouts {
         drawString(32, "   ) `\\_         |-_;                        ~--_ ~~~;;------------~~~~~ ;;;'_/'");
         drawString(33, "   `----'       (   `~--_                        '~~~-----....___;;;____---~~");
         drawString(34, "                `~~~~~~~~'");
-        drawString(38, "                                  Press enter to continue...");
+        drawString(38, "                                  Press [<font color='MAGENTA'>ENTER</font>] to continue...");
     }
 
     public static void mainMenu() {
         wipeScreen();
-        drawString(2, " Legend of ASCII                                                                     BUILD v1.0");
-        drawString(3, "  .--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--.");
+        drawString(2, "<font color='YELLOW'> Legend of ASCII</font>                                                                     <font color='CYAN'>BUILD v1.0</font>");
+        drawString(3, "<font color='#00008B'>  .--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--.");
         drawString(4, " / .. \\.. \\.. \\.. \\.. \\.. \\.. \\.. \\.. \\.. \\.. \\.. \\.. \\.. \\.. \\.. \\.. \\.. \\.. \\.. \\.. \\.. \\.. \\");
         drawString(5, " \\ \\/\\ \\/\\ \\/\\ \\/\\ \\/\\ \\/\\ \\/\\ \\/\\ \\/\\ \\/\\ \\/\\ \\/\\ \\/\\ \\/\\ \\/\\ \\/ /\\ \\/ /\\ \\/ /\\ \\/ /\\ \\/ /\\ \\/");
         drawString(6, "  \\/ /\\/ /\\/ /\\/ /\\/ /\\/ /\\/ /\\/ /\\/ /\\/ /\\/ /\\/ /\\/ /\\/ /\\/ /\\/ /\\/ /\\/ /\\/ /\\/ /\\/ /\\/ /\\/ /");
@@ -91,23 +91,23 @@ public class Layouts {
         drawString(9, " \\ \\/\\ \\                                                                                /\\ \\/ /");
         drawString(10, "  \\/ /\\ \\                                                                              / /\\/ /");
         drawString(11, "  / /\\/ /                                                                              \\ \\/ /\\");
-        drawString(12, " / /\\ \\/           .                  .-.    .  _   *     _   .                         \\ \\/\\ \\");
-        drawString(13, " \\ \\/\\ \\                  *          /   \\     ((       _/ \\       *    .               /\\ \\/ /");
-        drawString(14, "  \\/ /\\ \\               _    .   .--'\\/\\_ \\     `      /    \\  *    ___                / /\\/ /");
-        drawString(15, "  / /\\/ /           *  / \\_    _/ ^      \\/\\'__        /\\/\\  /\\  __/   \\ *             \\ \\/ /\\");
-        drawString(16, " / /\\ \\/              /    \\  /    .'   _/  /  \\  *' /    \\/  \\/ .`'\\_/\\   .            \\ \\/\\ \\");
-        drawString(17, " \\ \\/\\ \\         .   /\\/\\  /\\/ :' __  ^/  ^/    `--./.'  ^  `-.\\ _    _:\\ _             /\\ \\/ /");
-        drawString(18, "  \\/ /\\ \\           /    \\/  \\  _/  \\-' __/.' ^ _   \\_   .'\\   _/ \\ .  __/ \\           / /\\/ /");
-        drawString(19, "  / /\\/ /         /\\  .-   `. \\/     \\ / -.   _/ \\ -. `_/   \\ /    `._/  ^  \\          \\ \\/ /\\");
-        drawString(20, " / /\\ \\/         /  `-.__ ^   / .-'.--'    . /    `--./ .-'  `-.  `-. `.  -  `.         \\ \\/\\ \\");
-        drawString(21, " \\ \\/\\ \\       /        `.  / /      `-.   /  .-'   / .   .'   \\    \\  \\  .-  \\%        /\\ \\/ /");
-        drawString(22, "  \\/ /\\ \\      @&8jgs@@%% @)&@&(88&@.-_=_-=_-=_-=_-=_.8@% &@&&8(8%@%8)(8@%8 8%@)%      / /\\/ /");
-        drawString(23, "  / /\\/ /      @88:::&(&8&&8:::::%&`.~-_~~-~~_~-~_~-~~=.'@(&%::::%@8&8)::&#@8::::      \\ \\/ /\\");
-        drawString(24, " / /\\ \\/       `::::::8%@@%:::::@%&8:`.=~~-.~~-.~~=..~'8::::::::&@8:::::&8:::::'        \\ \\/\\ \\");
-        drawString(25, " \\ \\/\\ \\        `::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::.'         /\\ \\/ /");
+        drawString(12, " / /\\ \\/<font color='YELLOW'>           .                  </font><font color='WHITE'>.-.    <font color='YELLOW'>.  _   *</font>     _   <font color='YELLOW'>.</font></font>                         \\ \\/\\ \\");
+        drawString(13, " \\ \\/\\ \\<font color='YELLOW'>                  *          </font><font color='WHITE'>/   \\<font color='YELLOW'>     ((       </font>_/ \\<font color='YELLOW'>       *    .</font></font>               /\\ \\/ /");
+        drawString(14, "  \\/ /\\ \\               <font color='WHITE'>_    .   .--'\\/\\_ \\     <font color='YELLOW'>`</font>      /    \\  <font color='YELLOW'>*</font>    ___</font>                / /\\/ /");
+        drawString(15, "  / /\\/ /<font color='YELLOW'>           *</font>  <font color='WHITE'>/ \\_    _/ ^      \\/\\'__        /\\/\\  /\\  __/   \\ <font color='YELLOW'>*</font></font>             \\ \\/ /\\");
+        drawString(16, " / /\\ \\/              <font color='WHITE'>/    \\  /    .'   _/  /  \\  <font color='YELLOW'>*'</font> /    \\/  \\/ .`'\\_/\\   <font color='YELLOW'>.</font></font>            \\ \\/\\ \\");
+        drawString(17, " \\ \\/\\ \\<font color='YELLOW'>         .</font>   <font color='LIGHTGRAY'>/\\/\\  /\\/ :' __  ^/  ^/    `--./.'  ^  `-.\\ _    _:\\ _</font>             /\\ \\/ /");
+        drawString(18, "  \\/ /\\ \\           <font color='LIGHTGRAY'>/    \\/  \\  _/  \\-' __/.' ^ _   \\_   .'\\   _/ \\ .  __/ \\</font>           / /\\/ /");
+        drawString(19, "  / /\\/ /         <font color='LIGHTGRAY'>/\\  .-   `. \\/     \\ / -.   _/ \\ -. `_/   \\ /    `._/  ^  \\</font>          \\ \\/ /\\");
+        drawString(20, " / /\\ \\/         <font color='GRAY'>/  `-.__ ^   / .-'.--'    . /    `--./ .-'  `-.  `-. `.  -  `.</font>         \\ \\/\\ \\");
+        drawString(21, " \\ \\/\\ \\       <font color='GRAY'>/        `.  / /      `-.   /  .-'   / .   .'   \\    \\  \\  .-  \\%</font>        /\\ \\/ /");
+        drawString(22, "  \\/ /\\ \\      <font color='GREEN'>@&8jgs@@%% @)&@&(88&@<font color='BLUE'>.-_=_-=_-=_-=_-=_.</font>8@% &@&&8(8%@%8)(8@%8 8%@)%</font>      / /\\/ /");
+        drawString(23, "  / /\\/ /      <font color='KHAKI'><font color='GREEN'>@88</font>:::<font color='GREEN'>&(&8&&8</font>:::::<font color='GREEN'>%&</font><font color='BLUE'>`.~-_~~-~~_~-~_~-~~=.'</font><font color='GREEN'>@(&%</font>::::<font color='GREEN'>%@8&8)</font>::<font color='GREEN'>&#@8</font>::::</font>      \\ \\/ /\\");
+        drawString(24, " / /\\ \\/       <font color='KHAKI'>`::::::<font color='GREEN'>8%@@%</font>:::::<font color='GREEN'>@%&8</font><font color='BLUE'>:`.=~~-.~~-.~~=..~'</font><font color='GREEN'>8</font>::::::::<font color='GREEN'>&@8</font>:::::<font color='GREEN'>&8</font>:::::'</font>        \\ \\/\\ \\");
+        drawString(25, " \\ \\/\\ \\        <font color='KHAKI'>`::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::.'</font>         /\\ \\/ /");
         drawString(26, "  \\/ /\\ \\                                                                              / /\\/ /");
         drawString(27, "  / /\\/ /                                                                              \\ \\/ /\\");
-        drawString(28, " / /\\ \\/                                  [1] New Game                                  \\ \\/\\ \\");
+        drawString(28, " / /\\ \\/                                  <font color='WHITE'>[<font color='YELLOW'>1</font>] New Game</font>                                  \\ \\/\\ \\");
         drawString(29, " \\ \\/\\ \\                                                                                /\\ \\/ /");
         drawString(30, "  \\/ /\\ \\                                                                              / /\\/ /");
         drawString(31, "  / /\\/ /                                                                              \\ \\/ /\\");
@@ -117,7 +117,7 @@ public class Layouts {
         drawString(35, "  / /\\/ /\\/ /\\/ /\\/ /\\/ /\\/ /\\/ /\\/ /\\/ /\\/ /\\/ /\\/ /\\/ /\\/ /\\/ /\\/ /\\/ /\\/ /\\/ /\\/ /\\/ /\\/ /\\");
         drawString(36, " / /\\ \\/\\ \\/\\ \\/\\ \\/\\ \\/\\ \\/\\ \\/\\ \\/\\ \\/\\ \\/\\ \\/\\ \\/\\ \\/\\ \\/\\ \\/\\ \\/\\ \\/\\ \\/\\ \\/\\ \\/\\ \\/\\ \\/\\ \\");
         drawString(37, " \\ `'\\ `'\\ `'\\ `'\\ `'\\ `'\\ `'\\ `'\\ `'\\ `'\\ `'\\ `'\\ `'\\ `'\\ `'\\ `'\\ `'\\ `'\\ `'\\ `'\\ `'\\ `'\\ `' /");
-        drawString(38, "  `--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'");
+        drawString(38, "  `--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'</font>");
         drawString(39, "Cast your command below:");
     }
 
@@ -128,14 +128,14 @@ public class Layouts {
         switch(LayoutPicker.entry) {
             case 10:
                 wipeScreen();
-                drawACoupleStrings(1, 3, 32, 39, "-8|==========================================================================================|8-");
+                drawACoupleStrings(1, 3, 32, 39, "<font color='GRAY'>-8|==========================================================================================|8-</font>");
                 drawString(2, "   CHARACTER CREATION");
                 drawString(10, "               Welcome, new hero!");
                 drawString(12, "               You're about to step into a new world...");
                 drawString(13, "               But first, let us create a hero for the story.");
                 drawString(15, "               --");
-                drawString(17, "               [continue] Go to character creation.");
-                drawString(18, "               [exit]     Exit to main menu.");
+                drawString(17, "               [<font color='YELLOW'>GO</font>]    Go to character creation.");
+                drawString(18, "               [<font color='YELLOW'>EXIT</font>]  Exit to main menu.");
                 drawString(34, "   HINT");
                 drawString(35, "   Possible commands are always captured in square brackets. To execute an action, type the");
                 drawString(36, "   command and press enter.");
@@ -144,17 +144,17 @@ public class Layouts {
                 drawString(10, "               GENDER");
                 drawString(12, "               Let's create your hero.");
                 drawString(13, "               First things first, is your hero male or female?");
-                drawString(17, "               [1] Male");
-                drawString(18, "               [2] Female");
+                drawString(17, "               [<font color='YELLOW'>1</font>] Male");
+                drawString(18, "               [<font color='YELLOW'>2</font>] Female");
                 break;
             case 12:
                 drawString(10, "               RACE");
                 drawString(12, "               You chose " + PlayerCharacter.getGender(0) + ". Let's pick " + PlayerCharacter.getGender(2) + " a race.");
                 drawString(13, "               What race is your character?");
-                drawString(17, "               [1] Human");
-                drawString(18, "               [2] Elf");
-                drawString(19, "               [3] Orc");
-                drawString(20, "               [4] Dwarf");
+                drawString(17, "               [<font color='YELLOW'>1</font>] Human");
+                drawString(18, "               [<font color='YELLOW'>2</font>] Elf");
+                drawString(19, "               [<font color='YELLOW'>3</font>] Orc");
+                drawString(20, "               [<font color='YELLOW'>4</font>] Dwarf");
                 drawString(35, "   You can always go [back] if you're not happy with your choice.");
                 wipeString(36);
                 break;
@@ -164,10 +164,10 @@ public class Layouts {
                 drawString(12, "               You've chosen your hero to be " + PlayerCharacter.getRace(4) + " " + PlayerCharacter.getRace(0) + ".");
                 drawString(17, "               --");
                 drawString(15, "               Now, choose a class.");
-                drawString(19, "               [1] Warrior");
-                drawString(20, "               [2] Ranger");
-                drawString(21, "               [3] Rogue");
-                drawString(22, "               [4] Mage");
+                drawString(19, "               [<font color='YELLOW'>1</font>] Warrior");
+                drawString(20, "               [<font color='YELLOW'>2</font>] Ranger");
+                drawString(21, "               [<font color='YELLOW'>3</font>] Rogue");
+                drawString(22, "               [<font color='YELLOW'>4</font>] Mage");
                 drawString(35, "   Keep in mind that all classes come with different perks and attributes.");
 
                 if(PlayerCharacter.getRace(0) == "human"){
@@ -196,17 +196,17 @@ public class Layouts {
                     drawString(13, "               Mages are dedicated practitioners of magic.");
                 }
                 if(PlayerCharacter.getRace(0) == "human" || PlayerCharacter.getRace(0) == "dwarf"){
-                    drawString(19, "               [1] Ugoris (Northern)");
-                    drawString(20, "               [2] Ageon (Western)");
-                    drawString(21, "               [3] Yepalos (Central)");
+                    drawString(19, "               [<font color='YELLOW'>1</font>] Ugoris (Northern)");
+                    drawString(20, "               [<font color='YELLOW'>2</font>] Ageon (Western)");
+                    drawString(21, "               [<font color='YELLOW'>3</font>] Yepalos (Central)");
                     wipeString(22);
                 } else if(PlayerCharacter.getRace(0) == "elf"){
-                    drawString(19, "               [1] Ugoris (Northern)");
-                    drawString(20, "               [2] Shiyux (Eastern)");
+                    drawString(19, "               [<font color='YELLOW'>1</font>] Ugoris (Northern)");
+                    drawString(20, "               [<font color='YELLOW'>2</font>] Shiyux (Eastern)");
                     wipeMultipleStrings(21, 22, 0);
                 } else if(PlayerCharacter.getRace(0) == "orc"){
-                    drawString(19, "               [1] Ageon (Western)");
-                    drawString(20, "               [2] Klaekun (Southern)");
+                    drawString(19, "               [<font color='YELLOW'>1</font>] Ageon (Western)");
+                    drawString(20, "               [<font color='YELLOW'>2</font>] Klaekun (Southern)");
                     wipeMultipleStrings(21, 22, 0);
                 }
                 break;
@@ -229,8 +229,8 @@ public class Layouts {
                 drawString(15, "               Class:    " + PlayerCharacter.getClassmode().substring(0, 1).toUpperCase() + PlayerCharacter.getClassmode().substring(1));
                 drawString(16, "               Region:   " + PlayerCharacter.getRegion(0) + " (" + PlayerCharacter.getRegion(1) + ")");
                 drawString(18, "               --");
-                drawString(20, "               [confirm] Continue with this character");
-                drawString(21, "               [back]    Go back");
+                drawString(20, "               [<font color='YELLOW'>GO</font>]    Continue with this character");
+                drawString(21, "               [<font color='YELLOW'>BACK</font>]  Go back");
                 drawString(34, "   HINT");
                 drawString(35, "   When you confirm your choices, you will not be able to change them.");
                 break;
@@ -242,7 +242,6 @@ public class Layouts {
             case 50:
                 wipeScreenWithExceptions(1, 3, 32, 34, 39, 0);
                 nameHPMPEnergy(2);
-                //drawString(2, "   " + Character.getName());
                 drawString(6, "                                                        /\\");
                 drawString(7, "                                                       /%%\\  /\\");
                 drawString(8, "                           ,                          /%%%%\\/%%\\");
@@ -267,7 +266,7 @@ public class Layouts {
                 drawString(27, "              _-               \\ /           _-         _-   ~~");
                 drawString(28, "                              ~\"\"\"~");
                 drawString(34, "   For as long as you can remember, this has been your home.");
-                drawString(37, "   Press [enter] to continue");
+                drawString(37, "   Press [<font color='MAGENTA'>ENTER</font>] to continue");
                 break;
             case 51:
                 wipeString(37);
@@ -298,7 +297,7 @@ public class Layouts {
                 break;
             case 58:
                 wipeMultipleStrings(34, 35, 36); wipeString(37);
-                drawString(35, "   You are " + PlayerCharacter.getName() + ", " + PlayerCharacter.getGender(4) + " of " + PlayerCharacter.getFather() + ".");
+                drawString(35, "   You are <font color='ORANGE'>" + PlayerCharacter.getName() + "</font>, " + PlayerCharacter.getGender(4) + " of " + PlayerCharacter.getFather() + ".");
                 break;
             case 59:
                 drawString(36, "   And one day you will avenge your father...");
@@ -307,10 +306,10 @@ public class Layouts {
                 wipeScreenWithExceptions(1, 2, 3, 32, 39, 0);
                 break;
             case 61:
-                drawString(35, "   \"" + PlayerCharacter.getName() + "! WAKE UP!\"");
+                drawString(35, "   \"<font color='ORANGE'>" + PlayerCharacter.getName() + "</font>! WAKE UP!\"");
                 break;
             case 62:
-                drawString(16, "                                                        (  .      )");
+                drawString(16, "<font color='ORANGE'>                                                        (  .      )");
                 drawString(17, "                                                    )           (              )");
                 drawString(18, "                                                          .  '   .   '  .  '  .");
                 drawString(19, "    ,.   (   .      )        .      \"            (    , )       (.   )  (   ',    )");
@@ -318,7 +317,7 @@ public class Layouts {
                 drawString(21, " .; )  ' (( (\" )    ;(,     ((  (  ;)  \"  )\"   ). , ( .   (  ) ( , ')  .' (  ,    )    .; )  ' (");
                 drawString(22, " _\"., ,._'_.,)_(..,( . )_  _' )_') (. _..( '..(_,) . ), ) _) _,')  (, ) '. )  ,. (' ) _\"., ,._'_");
                 drawString(23, ".   (  ) ( , ')  .' (  ,    )    .; )  ' ( .; )  ' (( (\" )    ;(,     ((  (  ;)  \"  )\"   ). , (");
-                drawString(24, "_\"., ,._'_ _\"., ,._'_.,)_(..,( . )_  _' )_') (. _..( '..(_,) . ), ) _) _,')  (, ) '. )  ,. (' )");
+                drawString(24, "_\"., ,._'_ _\"., ,._'_.,)_(..,( . )_  _' )_') (. _..( '..(_,) . ), ) _) _,')  (, ) '. )  ,. (' )</font>");
                 drawString(36, "   \"THE CABIN IS ON FIRE!\"");
                 break;
             case 63:
@@ -329,24 +328,24 @@ public class Layouts {
                 drawString(35, "   This might be your chance to escape...");
                 break;
             case 65:
-                drawString(36, "   [1] Escape");
-                drawString(37, "   [2] Take debris");
+                drawString(36, "   [<font color='YELLOW'>1</font>] Escape");
+                drawString(37, "   [<font color='YELLOW'>2</font>] Take debris");
                 break;
             case 66:
                 wipeMultipleStrings(34, 37, 0);
                 drawString(35, "   You equipped yourself with a WOODEN STICK.");
-                drawString(36, "   [1] Try to escape again");
+                drawString(36, "   [<font color='YELLOW'>1</font>] Try to escape again");
                 break;
             case 67:
                 wipeMultipleStrings(35, 36, 37);
                 drawString(34, "   You crawl through the window successfully and start running for the forest.");
                 break;
             case 68:
-                drawString(35, "   Someone sees you. \"HEY YOU! STOP RIGHT THERE!\"");
+                drawString(35, "   Someone sees you. \"<font style='i'>HEY YOU! STOP RIGHT THERE!</font>\"");
                 break;
             case 69:
-                drawString(36, "   [1] Fight");
-                drawString(37, "   [2] Flight");
+                drawString(36, "   [<font color='YELLOW'>1</font>] Fight");
+                drawString(37, "   [<font color='YELLOW'>2</font>] Flight");
                 break;
             case 70:
                 break;
@@ -388,7 +387,7 @@ public class Layouts {
                 drawString(31, "        |                                                                              |");
                 break;
             case "Forest":
-                drawString(4, "                                                            *j");
+                drawString(4, "<font color='GREEN'>                                                            *j");
                 drawString(5, "                                                          cIZd -");
                 drawString(6, "                                                         `y@@@$B_");
                 drawString(7, "                                                      _:.y@@@@@M}.`");
@@ -413,12 +412,12 @@ public class Layouts {
                 drawString(26, "*^iT)l?xiHM#@@@v *#@@@0  )@c (M,  _,`!=<iTwMQBQ8B####BBQBB###@@@@@#@@@@@b,:`xo`|*oB.!#r}EuQB`");
                 drawString(27, ":^-_ -=\\(q#@@@@#`e#@@@@K ]@$,8@X   8K    `.hZ90###B#@@##B#B@#@@@@@@@@@@@#@@#0@6$B6@$g@Q'<H@@?");
                 drawString(28, "      !^^*eGQ#@#vIjRBB@@}d@@####y`K@@v .-=<YYP98@@@B#@@@###Q#@#@@@@@@@@@@@@@@@@#88OgRQ@k)$Q@#!");
-                drawString(29, "     `rv|¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯|QMIKOm:");
-                drawString(30, "      '!|   " + Map.getDisplayInformation() + "   |!-;3yVyz");
-                drawString(31, "        |                                                                              |        -,\"*!");
+                drawString(29, "     `rv</font>|¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯|<font color='GREEN'>QMIKOm:");
+                drawString(30, "      '!</font>|   " + Map.getDisplayInformation() + "   |<font color='GREEN'>!-;3yVyz</font>");
+                drawString(31, "        |                                                                              |<font color='GREEN'>        -,\"*!</font>");
                 break;
             case "Mountains":
-                drawString(6, "                                            `)]M`");
+                drawString(6, "<font color='LIGHTGRAY'>                                            `)]M`");
                 drawString(7, "                                           >w^:QDx'");
                 drawString(8, "                                         :y\\::3?R#Q<");
                 drawString(9, "                                       .Yv_ '!-,z@@Bw~.");
@@ -440,13 +439,13 @@ public class Layouts {
                 drawString(25, "  _T- `-_` !!,,,.` '     `*3E=.`  _^!  _x~` x@@gK:-x, xL`  ^`.` -.  ` -'vP:~x<0j-`_u*QB8@#B#@#IR");
                 drawString(26, " _?`   `  `:!='       ':=rMxi`  `-:`' .x.   `Q@#r!:  `}\"  -`   ``   ```Vx-:rVI('``_-TVR#dmZ#@#$K");
                 drawString(27, "_:        __`     `-_=, *u` =  ` ' ``-x\"  ``^XcH``  ,(_       .<.   .!*-`<rT_  `^`<y<`-Yg#06$ZH}");
-                drawString(28, "`         `     '_-   '*~_  '     `'`}_` `'`*- .^ `!:`        .` `_,\"`'!r-    `_, ^_     ~L-``-\"");
-                drawString(29, "        |¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯|     _");
+                drawString(28, "`         `     '_-   '*~_  '     `'`}_` `'`*- .^ `!:`        .` `_,\"`'!r-    `_, ^_     ~L-``-\"</font>");
+                drawString(29, "        |¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯|<font color='LIGHTGRAY'>     _</font>");
                 drawString(30, "        |   " + Map.getDisplayInformation() + "   |");
                 drawString(31, "        |                                                                              |");
                 break;
             case "Swamp":
-                drawString(4, "                           `\\`         *`*. : .    *.\\     -_.=            L):");
+                drawString(4, "<font color='GRAY'>                           `\\`         *`*. : .    *.\\     -_.=            L):");
                 drawString(5, "                      :^  `Y`          ) )_-! *  \"`(`\\      x--^=!        _T i'");
                 drawString(6, "                      (! _y-           `r(.:- ^ :*_^`r       <^. :\\        `r~r==~'");
                 drawString(7, "             ^'      `u_*~\"             r`\\`- (`:v_=:^         <* :!          _=!~};=;:");
@@ -471,9 +470,9 @@ public class Layouts {
                 drawString(26, "      _r^x}-.\\~~}vTu`!*;x-*r,                                     .^r^-\"=!`    ~_`L`.y");
                 drawString(27, "*==::*y^y\" *\\)r`\\rYkM -x=\\) ;Y::!::!:\",-                       r^v*:!-!^ *    ;`, V:`}:");
                 drawString(28, "~\": `T^u' v!<vr`* )TTT  sjvY!_v=-....:)*,                    :u` `x``T^=<)   \"! =`sr,:^\\");
-                drawString(29, " -:(m*Y\\|¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯|c* -r==!!~`");
-                drawString(30, "  -::VH:|   " + Map.getDisplayInformation() + "   |sy\\!,::;^");
-                drawString(31, "        |                                                                              |_^^~` `'..--_-");
+                drawString(29, " -:(m*Y\\</font>|¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯|<font color='GRAY'>c* -r==!!~`");
+                drawString(30, "  -::VH:</font>|   " + Map.getDisplayInformation() + "   |<font color='GRAY'>sy\\!,::;^</font>");
+                drawString(31, "        |                                                                              |<font color='GRAY'>_^^~` `'..--_-</font>");
                 break;
             case "Town":
                 drawString(4, "");
@@ -506,15 +505,15 @@ public class Layouts {
                 drawString(31, "");
                 break;
         }
-        drawString(34, "        " + Map.option1 + "             [R] Rest");
-        drawString(35, "        " + Map.option2 + "             [M] Map");
-        drawString(36, "                                 [S] Stats");
-        drawString(37, "                                 [I] Inventory");
+        drawString(34, "        " + Map.option1 + "             [<font color='YELLOW'>R</font>] Rest");
+        drawString(35, "        " + Map.option2 + "             [<font color='YELLOW'>M</font>] Map");
+        drawString(36, "                                 [<font color='YELLOW'>S</font>] Stats");
+        drawString(37, "                                 [<font color='YELLOW'>I</font>] Inventory");
         if(Map.numberofoptions == 3){
-            drawString(36, "        " + Map.option3 + "             [S] Stats");
+            drawString(36, "        " + Map.option3 + "             [<font color='YELLOW'>S</font>] Stats");
         } else if(Map.numberofoptions == 4){
-            drawString(36, "        " + Map.option3 + "             [S] Stats");
-            drawString(37, "        " + Map.option4 + "             [I] Inventory");
+            drawString(36, "        " + Map.option3 + "             [<font color='YELLOW'>S</font>] Stats");
+            drawString(37, "        " + Map.option4 + "             [<font color='YELLOW'>I</font>] Inventory");
         }
     }
 
@@ -524,7 +523,7 @@ public class Layouts {
         drawString(4, "     N");
         drawString(5, "   W + E                                     MAP OF");
         drawString(6, "     S                                  THE GREAT UGORIS");
-        drawString(8, "" + printMapRow(0));
+        drawString(8, "<font color='GRAY'>" + printMapRow(0));
         drawString(9, "" + printMapRow(1));
         drawString(10, "" + printMapRow(2));
         drawString(11, "" + printMapRow(3));
@@ -543,13 +542,13 @@ public class Layouts {
         drawString(24, "" + printMapRow(16));
         drawString(25, "" + printMapRow(17));
         drawString(26, "" + printMapRow(18));
-        drawString(27, "" + printMapRow(19));
-        drawString(29, "      Ϙ = Player           - = Heath      Ѧ = Mountains   ₮ = Town                        N");
-        drawString(30, "      ֎ = Quest            \" = Forest     ~ = Swamp         = Undiscoverd               W + E");
+        drawString(27, "" + printMapRow(19) + "</font>");
+        drawString(29, "      Ϙ = Player           <font color='KHAKI'>-</font> = Heath      <font color='LIGHTGRAY'>Ѧ</font> = Mountains   <font color='GOLD'>₮</font> = Town                        N");
+        drawString(30, "      <font color='YELLOW'>֎</font> = Quest            <font color='LIME'>\"</font> = Forest     <font color='BLUE'>~</font> = Swamp                                     W + E");
         drawString(31, "                                                                                          S");
         drawString(34, "      Currently in:");
         drawString(35, "      " + Map.getNameofTile());
-        drawString(37, "      [EXIT] Exit MAP");
+        drawString(37, "      [<font color='YELLOW'>EXIT</font>] Exit MAP");
     }
 
     public static void Inventory(){
@@ -557,28 +556,28 @@ public class Layouts {
                 nameHPMPEnergy(2);
                 drawString(5, "   EQUIPMENT                                                                     " + defineSpacesForInteger(Inventory.getGold()) + "GOLD: " + Inventory.getGold());
                 drawString(6, "   ---------                                                            " + defineSpacesForInteger(Inventory.getTotalWeight()) + defineSpacesForInteger(PlayerCharacter.getStrength()) + "WEIGHT: " + Inventory.getTotalWeight() + "/" + PlayerCharacter.getStrength());
-                drawString(7, "                                                                               Go to [spells]");
-                drawString(8, "   [a] Left hand:     " + Inventory.showItemInEquipment(0));
-                drawString(9, "   [b] Right Hand:    " + Inventory.showItemInEquipment(1));
-                drawString(10, "   [c] Head:          " + Inventory.showItemInEquipment(2));
-                drawString(11, "   [d] Armor:         " + Inventory.showItemInEquipment(3));
-                drawString(12, "   [e] Feet:          " + Inventory.showItemInEquipment(4));
+                drawString(7, "                                                                               Go to [<font color='YELLOW'>SPELLS</font>]");
+                drawString(8, "   [<font color='YELLOW'>A</font>] Left hand:     " + Inventory.showItemInEquipment(0));
+                drawString(9, "   [<font color='YELLOW'>B</font>] Right Hand:    " + Inventory.showItemInEquipment(1));
+                drawString(10, "   [<font color='YELLOW'>C</font>] Head:          " + Inventory.showItemInEquipment(2));
+                drawString(11, "   [<font color='YELLOW'>D</font>] Armor:         " + Inventory.showItemInEquipment(3));
+                drawString(12, "   [<font color='YELLOW'>E</font>] Feet:          " + Inventory.showItemInEquipment(4));
                 drawString(14, "   -----------------------------------------SUPPLIES-----------------------------------------");
-                drawString(16, "    [1] " + Inventory.showItemInSupplies(0) + " || [16] " + Inventory.showItemInSupplies(15));
-                drawString(17, "    [2] " + Inventory.showItemInSupplies(1) + " || [17] " + Inventory.showItemInSupplies(16));
-                drawString(18, "    [3] " + Inventory.showItemInSupplies(2) + " || [18] " + Inventory.showItemInSupplies(17));
-                drawString(19, "    [4] " + Inventory.showItemInSupplies(3) + " || [19] " + Inventory.showItemInSupplies(18));
-                drawString(20, "    [5] " + Inventory.showItemInSupplies(4) + " || [20] " + Inventory.showItemInSupplies(19));
-                drawString(21, "    [6] " + Inventory.showItemInSupplies(5) + " || [21] " + Inventory.showItemInSupplies(20));
-                drawString(22, "    [7] " + Inventory.showItemInSupplies(6) + " || [22] " + Inventory.showItemInSupplies(21));
-                drawString(23, "    [8] " + Inventory.showItemInSupplies(7) + " || [23] " + Inventory.showItemInSupplies(22));
-                drawString(24, "    [9] " + Inventory.showItemInSupplies(8) + " || [24] " + Inventory.showItemInSupplies(23));
-                drawString(25, "   [10] " + Inventory.showItemInSupplies(9) + " || [25] " + Inventory.showItemInSupplies(24));
-                drawString(26, "   [11] " + Inventory.showItemInSupplies(10) + " || [26] " + Inventory.showItemInSupplies(25));
-                drawString(27, "   [12] " + Inventory.showItemInSupplies(11) + " || [27] " + Inventory.showItemInSupplies(26));
-                drawString(28, "   [13] " + Inventory.showItemInSupplies(12) + " || [28] " + Inventory.showItemInSupplies(27));
-                drawString(29, "   [14] " + Inventory.showItemInSupplies(13) + " || [29] " + Inventory.showItemInSupplies(28));
-                drawString(30, "   [15] " + Inventory.showItemInSupplies(14) + " || [30] " + Inventory.showItemInSupplies(29));
+                drawString(16, "    [<font color='YELLOW'>1</font>] " + Inventory.showItemInSupplies(0) + " || [<font color='YELLOW'>16</font>] " + Inventory.showItemInSupplies(15));
+                drawString(17, "    [<font color='YELLOW'>2</font>] " + Inventory.showItemInSupplies(1) + " || [<font color='YELLOW'>17</font>] " + Inventory.showItemInSupplies(16));
+                drawString(18, "    [<font color='YELLOW'>3</font>] " + Inventory.showItemInSupplies(2) + " || [<font color='YELLOW'>18</font>] " + Inventory.showItemInSupplies(17));
+                drawString(19, "    [<font color='YELLOW'>4</font>] " + Inventory.showItemInSupplies(3) + " || [<font color='YELLOW'>19</font>] " + Inventory.showItemInSupplies(18));
+                drawString(20, "    [<font color='YELLOW'>5</font>] " + Inventory.showItemInSupplies(4) + " || [<font color='YELLOW'>20</font>] " + Inventory.showItemInSupplies(19));
+                drawString(21, "    [<font color='YELLOW'>6</font>] " + Inventory.showItemInSupplies(5) + " || [<font color='YELLOW'>21</font>] " + Inventory.showItemInSupplies(20));
+                drawString(22, "    [<font color='YELLOW'>7</font>] " + Inventory.showItemInSupplies(6) + " || [<font color='YELLOW'>22</font>] " + Inventory.showItemInSupplies(21));
+                drawString(23, "    [<font color='YELLOW'>8</font>] " + Inventory.showItemInSupplies(7) + " || [<font color='YELLOW'>23</font>] " + Inventory.showItemInSupplies(22));
+                drawString(24, "    [<font color='YELLOW'>9</font>] " + Inventory.showItemInSupplies(8) + " || [<font color='YELLOW'>24</font>] " + Inventory.showItemInSupplies(23));
+                drawString(25, "   [<font color='YELLOW'>10</font>] " + Inventory.showItemInSupplies(9) + " || [<font color='YELLOW'>25</font>] " + Inventory.showItemInSupplies(24));
+                drawString(26, "   [<font color='YELLOW'>11</font>] " + Inventory.showItemInSupplies(10) + " || [<font color='YELLOW'>26</font>] " + Inventory.showItemInSupplies(25));
+                drawString(27, "   [<font color='YELLOW'>12</font>] " + Inventory.showItemInSupplies(11) + " || [<font color='YELLOW'>27</font>] " + Inventory.showItemInSupplies(26));
+                drawString(28, "   [<font color='YELLOW'>13</font>] " + Inventory.showItemInSupplies(12) + " || [<font color='YELLOW'>28</font>] " + Inventory.showItemInSupplies(27));
+                drawString(29, "   [<font color='YELLOW'>14</font>] " + Inventory.showItemInSupplies(13) + " || [<font color='YELLOW'>29</font>] " + Inventory.showItemInSupplies(28));
+                drawString(30, "   [<font color='YELLOW'>15</font>] " + Inventory.showItemInSupplies(14) + " || [<font color='YELLOW'>30</font>] " + Inventory.showItemInSupplies(29));
                 drawString(34, "   To select an item, type in the number or letter of the slot.");
         switch(LayoutPicker.entry){
             case 9980: //Start screen
@@ -589,20 +588,24 @@ public class Layouts {
             case 9981: //Show details of item
                 wipeMultipleStrings(34, 35, 36); wipeString(37);
                 drawString(34, "   Details: " + Inventory.showItemName());
-                drawString(35, "   " + Inventory.showItemDetails());
+                drawString(35, "            " + Inventory.showItemDetails());
                 drawString(37, Inventory.actionOptions());
                 break;
             case 9982: //Hold item in hand
                 wipeMultipleStrings(34, 35, 36); wipeString(37);
                 drawString(34, "   " + Inventory.showItemInHand());
-                drawString(35, "   " + Inventory.showItemDetails());
+                if(Inventory.getThisSlot() + 1 > 9){
+                    drawString(35, "               " + Inventory.showItemDetails());
+                } else {
+                    drawString(35, "              " + Inventory.showItemDetails());
+                }
                 drawString(37, Inventory.actionOptions());
                 break;
             case 9983: //Equip item failure
                 wipeMultipleStrings(34, 35, 36); wipeString(37);
                 drawString(34, "   " + Inventory.showItemInHand());
-                drawString(35, "   " + Inventory.showItemDetails());
-                drawString(36, "   " + Inventory.errormessage);
+                drawString(35, "              " + Inventory.showItemDetails());
+                drawString(36, "              <font color='RED'>" + Inventory.errormessage + "</font>");
                 drawString(37, Inventory.actionOptions());
                 break;
         }
@@ -643,8 +646,8 @@ public class Layouts {
                 drawString(30, "/            _/        /     |  _\\o/   __  {.' __  '.} _   _\\o/  _|     \\        \\_            \\");
                 drawString(31, "           _/         /      `\"\"\"\"-\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"-\"\"\"\"`      \\         \\_");
                 drawString(34, "   You've encountered a lootbox!");
-                drawString(36, "   [O] Open loot");
-                drawString(37, "   [D] Discard");
+                drawString(36, "   [<font color='YELLOW'>O</font>] Open loot");
+                drawString(37, "   [<font color='YELLOW'>D</font>] Discard");
                 break;
             case 9971:
                 wipeScreenWithExceptions(1, 3, 32, 39, 0, 0);
@@ -671,9 +674,9 @@ public class Layouts {
                 drawString(26, "           .--.      .-'.      .--.      .--.      .--.      .--.      .`-.      .--.");
                 drawString(27, "         :::::.\\::::::::.\\::::::::.\\::::::::.\\::::::::.\\::::::::.\\::::::::.\\::::::::.\\");
                 drawString(28, "         '      `--'      `.-'      `--'      `--'      `--'      `-.'      `--'      `");
-                drawString(34, "   The loot contained... " + LootBox.getLootName() + ".");
-                drawString(36, "   [T] Take");
-                drawString(37, "   [D] Drop");
+                drawString(34, "   The loot contained... <font color='MAGENTA'>" + LootBox.getLootName() + "</font>.");
+                drawString(36, "   [<font color='YELLOW'>T</font>] Take");
+                drawString(37, "   [<font color='YELLOW'>D</font>] Drop");
                 break;
         }
     }
@@ -685,53 +688,60 @@ public class Layouts {
         nameHPMPEnergy(2);
         drawString(7, BattleMode.displayHealthBar());
         drawString(8, BattleMode.displayHealthNumeric());
+        drawString(5, "   .-=====================================================================================-.");
+        drawString(6, BattleMode.displayName());
+        drawString(9, "   '-=====================================================================================-'");
+        drawString(10, Avatar.getAvatar(0));
+        drawString(11, Avatar.getAvatar(1));
+        drawString(12, Avatar.getAvatar(2));
+        drawString(13, Avatar.getAvatar(3));
+        drawString(14, Avatar.getAvatar(4));
+        drawString(15, Avatar.getAvatar(5));
+        drawString(16, Avatar.getAvatar(6));
+        drawString(17, Avatar.getAvatar(7));
+        drawString(18, Avatar.getAvatar(8));
+        drawString(19, Avatar.getAvatar(9));
+        drawString(20, Avatar.getAvatar(10));
+        drawString(21, Avatar.getAvatar(11));
+        drawString(22, Avatar.getAvatar(12));
+        drawString(23, Avatar.getAvatar(13));
+        drawString(24, Avatar.getAvatar(14));
+        drawString(25, Avatar.getAvatar(15));
+        drawString(26, Avatar.getAvatar(16));
+        drawString(27, Avatar.getAvatar(17));
+        drawString(28, Avatar.getAvatar(18));
+        drawString(29, Avatar.getAvatar(19));
+        drawString(30, Avatar.getAvatar(20));
+        drawString(31, Avatar.getAvatar(21));
         switch(LayoutPicker.entry){
             case 9960:
-                drawString(5, "   .-=====================================================================================-.");
-                drawString(6, BattleMode.displayName());
-                drawString(9, "   '-=====================================================================================-'");
-                drawString(10, Avatar.getAvatar(0));
-                drawString(11, Avatar.getAvatar(1));
-                drawString(12, Avatar.getAvatar(2));
-                drawString(13, Avatar.getAvatar(3));
-                drawString(14, Avatar.getAvatar(4));
-                drawString(15, Avatar.getAvatar(5));
-                drawString(16, Avatar.getAvatar(6));
-                drawString(17, Avatar.getAvatar(7));
-                drawString(18, Avatar.getAvatar(8));
-                drawString(19, Avatar.getAvatar(9));
-                drawString(20, Avatar.getAvatar(10));
-                drawString(21, Avatar.getAvatar(11));
-                drawString(22, Avatar.getAvatar(12));
-                drawString(23, Avatar.getAvatar(13));
-                drawString(24, Avatar.getAvatar(14));
-                drawString(25, Avatar.getAvatar(15));
-                drawString(26, Avatar.getAvatar(16));
-                drawString(27, Avatar.getAvatar(17));
-                drawString(28, Avatar.getAvatar(18));
-                drawString(29, Avatar.getAvatar(19));
-                drawString(30, Avatar.getAvatar(20));
-                drawString(31, Avatar.getAvatar(21));
-                drawString(35, BattleMode.getDisplayInfo());
+                drawString(34, BattleMode.getDisplayInfo());
+                if(BattleMode.getPlayerGoesFirst()){
+                    drawString(35, "   You have initiative and go first.");
+                } else {
+                    drawString(35, "   The <font color='RED'>" + Enemy.getName() + "</font> has initiative and goes first.");
+                }
+                drawString(37, "   [<font color='YELLOW'>OK</font>] Start the fight - [<font color='YELLOW'>E</font>] Try to escape");
                 break;
             case 9961: // Players turn
-                drawString(34, BattleMode.displayAttack(0) + "[I] Inventory");
-                drawString(35, BattleMode.displayAttack(1) + "[R] Rest (+5 NRGY)");
-                drawString(36, BattleMode.displayAttack(2) + "[T] Toggle Spells");
-                drawString(37, BattleMode.displayAttack(3) + "[E] Escape");
+                drawString(34, BattleMode.displayAttack(0) + "[<font color='YELLOW'>I</font>] Inventory");
+                drawString(35, BattleMode.displayAttack(1) + "[<font color='YELLOW'>R</font>] Rest (+5 NRGY)");
+                drawString(36, BattleMode.displayAttack(2) + "[<font color='YELLOW'>T</font>] Toggle Spells");
+                drawString(37, BattleMode.displayAttack(3) + "[<font color='YELLOW'>E</font>] Escape");
                 break;
             case 9962: // Player turn results
                 wipeMultipleStrings(34, 36, 37);
                 drawString(35, BattleMode.getDisplayInfo());
                 break;
             case 9963: // Player killed enemy
-                drawString(36, "   You conquered the " + Enemy.getName() + "!");
+                drawString(35, "   You conquered the <font color='RED'>" + Enemy.getName() + "</font>!");
+                drawString(36, BattleMode.getDisplayInfo());
                 break;
             case 9964: // Looting conquered enemy
                 wipeString(36);
                 drawString(35, BattleMode.getDisplayInfo());
                 if(BattleMode.hasLoot()){
-                    drawString(37, "   [T] Take  - [DROP] Drop loot");
+                    drawString(37, "   [<font color='YELLOW'>T</font>] Take  - [<font color='YELLOW'>DROP</font>] Drop loot");
                 }
                 break;
             case 9965: // Enemies turn

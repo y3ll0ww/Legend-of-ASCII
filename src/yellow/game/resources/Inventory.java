@@ -1,14 +1,17 @@
 package yellow.game.resources;
 
 import yellow.game.gui.LayoutPicker;
-import yellow.game.resources.objects.Head;
-import yellow.game.resources.objects.Item;
+import yellow.game.resources.objects.items.Head;
+import yellow.game.resources.objects.items.Item;
 import yellow.game.resources.objects.PlayerCharacter;
-import yellow.game.resources.objects.Weapon;
+import yellow.game.resources.objects.items.Weapon;
 
 public class Inventory {
     public static int thislocation;
     public static int thisslot;
+    public static int getThisSlot(){
+        return thisslot;
+    }
     public static int nextentry;
     public static int entrystartpoint;
 
@@ -45,21 +48,24 @@ public class Inventory {
     public static int getNextEntry(){ return nextentry; }
 
     public static String showItemInEquipment(int slot){
-        String information = "<none>";
+        String information = "<font color='GRAY'><none></font>";
         int magicdamordef;
         if(Equipment[slot] != null){
-            information = Equipment[slot].getName() + " (LVL " + Equipment[slot].getLevel() + ")";
+            information = Equipment[slot].getName() + " !level" + Equipment[slot].getLevel();
             if(Equipment[slot].isWeapon()){
-                information += " " + Equipment[slot].getDamage() + " DMG";
+                information += " " + Equipment[slot].getDamage() + " ATT ";
                 magicdamordef = Equipment[slot].getMagicDamage();
             } else {
-                information += " " + Equipment[slot].getDefence() + " DEF";
+                information += " " + Equipment[slot].getDefence() + " DEF ";
                 magicdamordef = Equipment[slot].getMagicDefence();
             }
             if(Equipment[slot].isMagical() == 1){
-                information += " | " + magicdamordef + " " + Equipment[slot].getMagicType();
+                information += "| " + magicdamordef + " " + Equipment[slot].getMagicType() + " ";
             }
-            information += " | " + Equipment[slot].getWeight() + " WGHT";
+            information += "| " + Equipment[slot].getWeight() + " WGHT ";
+            if(Equipment[slot].isTwoHanded() && slot == 1){
+                information = "\" TWOHANDED ";
+            }
         }
         if(information.length() > 70){
             char[] informationchars = new char[68];
@@ -78,9 +84,9 @@ public class Inventory {
         if(Supplies[slot] != null){
             information = Supplies[slot].getName();
             if(Supplies[slot].isWeapon() || Supplies[slot].isHead()){
-                information += " (LVL " + Supplies[slot].getLevel() + ")";
+                information += " !level" + Supplies[slot].getLevel();
             }
-            information += " " + Supplies[slot].getWeight() + " WGHT";
+            information += " " + Supplies[slot].getWeight() + " WGHT ";
             if(information.length() > 38){
                 String newname = "";
                 for(int i = 0; i < 34; i++){
@@ -90,8 +96,18 @@ public class Inventory {
                 information = newname;
             }
         }
-        for(int i = 0; i < 37 - information.length(); i++){
-            spaces += " ";
+        if(information.length() == 38){
+            information += " ";
+        } else {
+            int iterations;
+            if(Supplies[slot] != null){
+                iterations = 42; // Because of !level
+            } else {
+                iterations = 37;
+            }
+            for(int i = 0; i < iterations - information.length() - 1; i++){
+                spaces += " ";
+            }
         }
         information += spaces;
         return information;
@@ -126,17 +142,17 @@ public class Inventory {
         String options = "";
         switch(LayoutPicker.entry){
             case 9980:
-                options += "   [EXIT] Exit inventory";
+                options += "   [<font color='YELLOW'>EXIT</font>] Exit inventory";
                 break;
             case 9981:
                 if(Holding[0] != null){
-                    options += "   [H] Hold item in hand - [EXIT] Exit inventory";
+                    options += "   [<font color='YELLOW'>H</font>] Hold item in hand - [<font color='YELLOW'>EXIT</font>] Exit inventory";
                 } else {
-                    options += "   [*] *Any slot - [EXIT] Exit inventory";
+                    options += "   [<font color='MAGENTA'>*</font>] Any slot - [<font color='YELLOW'>EXIT</font>] Exit inventory";
                 } break;
             case 9982: case 9983: case 9984:
                 if(Holding[0] != null){
-                    options += "   [*] *Any slot - [DROP] Drop item";
+                    options += "   [<font color='MAGENTA'>*</font>] Any slot - [<font color='YELLOW'>DROP</font>] Drop item";
                 } break;
         }
         return options;
@@ -145,8 +161,8 @@ public class Inventory {
         String information = "";
         if(Holding[0] != null){
             information = Holding[0].getName();
-            if(Holding[0].isWeapon()){
-                information += " (LVL: " + Holding[0].getLevel() + ")";
+            if(Holding[0].isWeapon() || Holding[0].isHead()){
+                information += " !level<font color='WHITE'>" + Holding[0].getLevel() + "</font>";
             }
         } else {
             return "There is nothing in slot " + convertSlot() + ".";
@@ -157,7 +173,7 @@ public class Inventory {
         String information = "";
         if(Holding[0] != null){
             if(Holding[0].isWeapon()){
-                information += Holding[0].getDamage() + " DMG";
+                information += Holding[0].getDamage() + " ATT";
                 if(Holding[0].isMagical() == 1){
                     information += " | " + Holding[0].getMagicDamage() + " " + Holding[0].getMagicType();
                 }
@@ -173,7 +189,7 @@ public class Inventory {
                     information += " | " + Holding[0].getMagicDefence() + " MGC";
                 }
             }
-            information += " | " + Holding[0].getWeight() + " WGHT";
+            information += " | " + Holding[0].getWeight() + " WGHT ";
         } else {
             return "";
         }
@@ -197,10 +213,11 @@ public class Inventory {
             }
         }
     }
-    public static void switchOrPlaceItem(int location, int slot) {
+    public static void addItem(int location, int slot) {
         boolean ispossible;
         if(location == 1){
             ispossible = canCarryWeight(1, slot);
+            ///////WEAPON ITEM
                 if(Holding[0].isWeapon() && (slot == 0 || slot == 1)) { //WEAPONS in EQUIPMENT slot 0 or 1
                     if(Holding[0].isTwoHanded()) {
                         equipTwoHandedWeapon(); /////////////////////////////////////////////  RESEARCH WEIGHT WITH TWOHANDED WEAPONS ////////////////////////////////////////////////////// //Place TWOHANDED
@@ -216,58 +233,99 @@ public class Inventory {
                             setNextEntry(9982);
                         } else { tooHeavy(); }
                     } else { //if NOT TWOHANDED
-                        if(Equipment[slot] == null){ //Place ONEHANDED
-                            if(ispossible){
-                                Equipment[slot] = Holding[0];
-                                dropItem(3, 0);
-                                setNextEntry(9980);
+                        if(Equipment[0] == null && Equipment[1] == null){ //Place ONEHANDED
+                            if(ispossible){ switchOrPlaceItem(slot, 1, true);
                             } else { tooHeavy(); }
-                        } else { //Switch ONEHANDED
-                            if(ispossible){
-                                setTotalWeight(getTotalWeight() - Equipment[slot].getWeight());
-                                Holding[1] = Equipment[slot]; //Set inventory item to working storage
-                                Equipment[slot] = Holding[0]; //Set item in hand to inventory item
-                                Holding[0] = Holding[1];      //Pass working storage item to item in hand
-                                dropItem(3, 1); //Delete item in working storage
-                                setNextEntry(9982);
+                        } else if(Equipment[slot] != null) { //Switch ONEHANDED
+                            if(ispossible){ switchOrPlaceItem(slot, 1, false);
                             } else { tooHeavy(); }
+                        } else if(Equipment[slot] == null) {
+                            if(slot == 0){
+                                switchOrPlaceItem(1, 1, false);
+                                Equipment[slot] = Equipment[1];
+                                Equipment[1] = null;
+                            }
+                            else if(slot == 1){
+                                switchOrPlaceItem(0,1, false);
+                                Equipment[slot] = Equipment[0];
+                                Equipment[0] = null;
+                            }
                         }
                     }
-                    // COMPLETE SWITCH OR PLACE
-                    if(ispossible){
-                        totalweight += Equipment[slot].getWeight();
-                        thislocation = location;
-                        thisslot = slot;
-                    }
+                    completeSwitchOrPlace(slot, location, ispossible);
                 } else if(Holding[0].isWeapon() && (slot != 0 && slot != 1)) { //Trying a non-weapon slot
                     errormessage = "Weapons can only be equipped to left- or right hand.";
                     setNextEntry(9983);
+            ///////HEAD ITEM
+                } else if(Holding[0].isHead() && slot == 2) {
+                    if(Equipment[slot] == null){
+                        if(ispossible){ switchOrPlaceItem(slot, 1, true);
+                        } else { tooHeavy(); }
+                    } else {
+                        if(ispossible){ switchOrPlaceItem(slot, 1, false);
+                        } else { tooHeavy(); }
+                    }
+                    completeSwitchOrPlace(slot, location, ispossible);
+                } else if(Holding[0].isHead() && slot != 2){
+                    errormessage = "Headgear can only be equipped on your head.";
+                    setNextEntry(9983);
                 }
-            } else if(location == 2) {
-                ispossible = canCarryWeight(2, slot);
-                if (Supplies[slot] == null) { //Place
-                    if(ispossible){
-                        Supplies[slot] = Holding[0];
-                        dropItem(3, 0);
-                        setNextEntry(9980);
-                    } else { tooHeavy(); }
-                } else { //Switch
-                    if(ispossible){
-                        setTotalWeight(getTotalWeight() - Supplies[slot].getWeight());
-                        Holding[1] = Supplies[slot];  //Set inventory item to working storage
-                        Supplies[slot] = Holding[0];  //Set inventory item to item in hand
-                        Holding[0] = Holding[1];      //Pass working storage item to item in hand
-                        dropItem(3, 1); //Delete item in working storage
-                        setNextEntry(9982);
-                    } else { tooHeavy(); }
-                }
-                // COMPLETE SWITCH OR PLACE
+        } else if(location == 2) {
+            ispossible = canCarryWeight(2, slot);
+            if (Supplies[slot] == null) { //Place
                 if(ispossible){
-                    totalweight += Supplies[slot].getWeight();
-                    thislocation = location;
-                    thisslot = slot;
+                    Supplies[slot] = Holding[0];
+                    dropItem(3, 0);
+                    setNextEntry(9980);
+                } else { tooHeavy(); }
+            } else { //Switch
+                if (ispossible) {
+                    switchOrPlaceItem(slot, 2, false);
+                } else {
+                    tooHeavy();
                 }
             }
+            completeSwitchOrPlace(slot, location, ispossible);
+        }
+    }
+    public static void completeSwitchOrPlace(int slot, int location, boolean yn){
+        if(yn){
+            if(location == 1){
+                System.out.println("SLOT = " + slot + "\nLOCATION =" + location);
+                totalweight += Equipment[slot].getWeight();
+                thislocation = location;
+                thisslot = slot;
+            } else if(location == 2){
+                System.out.println("SLOT = " + slot + "\nLOCATION =" + location);
+                totalweight += Supplies[slot].getWeight();
+                thislocation = location;
+                thisslot = slot;
+            }
+
+        }
+    }
+    public static void switchOrPlaceItem(int slot, int location, boolean place){
+        if(place){
+            Equipment[slot] = Holding[0];
+            dropItem(3, 0);
+            setNextEntry(9980);
+        } else {
+            if(location == 1){
+                setTotalWeight(getTotalWeight() - Equipment[slot].getWeight());
+                Holding[1] = Equipment[slot];  //Set inventory item to working storage
+                Equipment[slot] = Holding[0];  //Set inventory item to item in hand
+                Holding[0] = Holding[1];      //Pass working storage item to item in hand
+                dropItem(3, 1); //Delete item in working storage
+                setNextEntry(9982);
+            } else if(location == 2){
+                setTotalWeight(getTotalWeight() - Supplies[slot].getWeight());
+                Holding[1] = Supplies[slot];  //Set inventory item to working storage
+                Supplies[slot] = Holding[0];  //Set inventory item to item in hand
+                Holding[0] = Holding[1];      //Pass working storage item to item in hand
+                dropItem(3, 1); //Delete item in working storage
+                setNextEntry(9982);
+            }
+        }
     }
     public static void tooHeavy(){
         errormessage = "Unable to place item. You cannot carry that much weight! (WEIGHT: " + Holding[0].getWeight() + ")";
@@ -318,7 +376,15 @@ public class Inventory {
             dropItem(3, 1);
             setNextEntry(9982);
         } else if(Equipment[0] != null && Equipment[1] != null){//////////////////Switch equipment to holding in hand
-            setNextEntry(9983);
+            if(Equipment[0].isWeapon() && Equipment[0].isTwoHanded()){
+                Equipment[0] = Holding[0];
+                Holding[0] = Equipment[1];
+                Equipment[1] = Equipment[0];
+                setNextEntry(9982);
+            } else {
+                errormessage = "Cannot switch one for two items.";
+                setNextEntry(9983);
+            }
         }
     }
     public static void dropItem(int location, int slot){
@@ -343,17 +409,16 @@ public class Inventory {
     ///////////WEAPONS
     public static void addWeaponToEmptySlot(Weapon x, int returnentry){ //What to do if there is no room in inventory  ???
         if(totalweight + x.getWeight() > PlayerCharacter.getStrength()){
-            System.out.println("Totalweight + new weapon > Strength"); /////////////////////////////
             Holding[0] = x;
             errormessage = "This item is to heavy. Switch it with a different item or drop it. (WEIGHT: " + x.getWeight() + ")";
             enterInventory(returnentry,9983); //Equip item failure
         } else {
             if(x.isTwoHanded()){
-                System.out.println("New twohanded weapon, both slots null" + totalweight + " " + x.getWeight()); /////////////////////////////
+                //Twohanded weapon goes to equipment
                 if (Equipment[0] == null && Equipment[1] == null) {
                     Equipment[0] = x; Equipment[1] = x;
                 } else {
-                    System.out.println("New twohanded weapon, not equipped" + totalweight + " " + x.getWeight()); /////////////////////////////
+                    //Twohanded weapon goes to supplies
                     for(int i = 0; i < Supplies.length; i++){
                         if(Supplies[i] == null){
                             Supplies[i] = x;
@@ -361,14 +426,11 @@ public class Inventory {
                         }
                     }
                 }
-            } else if(Equipment[0] == null) {
-                System.out.println("New weapon in equipment: left hand" + totalweight + " " + x.getWeight()); /////////////////////////////
+            } else if(Equipment[0] == null && Equipment[1] == null) {
+                //Weapon goes to equipment, left hand
                 Equipment[0] = x;
-            } else if(Equipment[1] == null) {
-                System.out.println("New weapon in equipment: right hand" + totalweight + " " + x.getWeight()); /////////////////////////////
-                Equipment[1] = x;
             } else {
-                System.out.println("New weapon in supplies" + totalweight + " " + x.getWeight()); /////////////////////////////
+                //Weapon goes to supplies
                 for(int i = 0; i < Supplies.length; i++){
                     if(Supplies[i] == null){
                         Supplies[i] = x;

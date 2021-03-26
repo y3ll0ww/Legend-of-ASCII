@@ -1,4 +1,4 @@
-package yellow.game.resources.objects.items.weapons;
+package yellow.game.resources.objects.items;
 
 import yellow.game.resources.objects.PlayerCharacter;
 import yellow.game.resources.objects.items.Attack;
@@ -7,7 +7,6 @@ import yellow.game.resources.objects.items.Item;
 import java.util.Arrays;
 
 public class Weapon extends Item {
-    Weapon nullweapon = null;
     Attack attacks = null;
     boolean twohanded;
     boolean ranged;
@@ -59,8 +58,6 @@ public class Weapon extends Item {
         setLevel(level);
         setMaterial(level);
         createWeapon();
-        //nullweapon = createWeapon();
-        //nullweapon = null;
         if(this.ismagical == 2){ //ismagical = undecided
             int decideifmagical = rd.nextInt(100);
             if(decideifmagical <= 70){
@@ -70,10 +67,9 @@ public class Weapon extends Item {
         if(this.ismagical == 1){ //ismagical = true
             setMagicType(rd.nextInt(getMagicTypeLength() - 1));
         }
-        //this.attacks = nullweapon.attacks;
-        setWeaponName(name);
         setDamage();
         setMagicDamage();
+        setWeaponName(name);
     }
 
     void createWeapon(){

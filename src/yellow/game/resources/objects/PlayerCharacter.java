@@ -19,14 +19,14 @@ public class PlayerCharacter {
 
     //Level + Experience
     public static int level = 1;
-    public static int XP = 0;
     public static int getLevel(){ return level; }
-    public static int getXP(){ return XP; }
     public static void setLevel(){ level++; }
-    public static void setXP(int add){ XP += add; }
+    public static int XP = 0;
+    public static int getXP(){ return XP; }
+    public static void setXP(int xp){ XP = xp; }
 
     //Initiative
-    public static double initiative = 1.5;
+    public static double initiative = 0.5;
     public static void setInitiative(double ini){ initiative = ini; }
     public static double getInitiative(){ return initiative; }
 
@@ -197,19 +197,8 @@ public class PlayerCharacter {
             HP += change;
         }
     }
-    public static void setEnergy(int change){
-        int newenergy;
-        if(energy + change > maxenergy){
-            newenergy = maxenergy;
-        } else if(energy + change < 0) {
-            newenergy = 0;
-        } else {
-            newenergy = energy + change;
-        }
-        energy = newenergy;
-    }
-    public static void setEnergy(boolean max){
-        energy = getMaxEnergy();
+    public static void setEnergy(int NRGY){
+        energy = NRGY;
     }
 
     public static void initializeCharacterStats(){
@@ -272,6 +261,10 @@ public class PlayerCharacter {
         MP = maxMP;
         maxenergy += endurance;
         energy = maxenergy;
+        ///////////////////////
+        magic = 300;
+        dexterity = 300;
+        strength = 300;
     }
 
 }

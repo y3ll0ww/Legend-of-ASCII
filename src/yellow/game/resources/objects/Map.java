@@ -43,7 +43,7 @@ public class Map {
     }
 
     public static void spawnPlayerOnMap(){
-        map[posX][posY][2] = "[Ϙ]";
+        map[posX][posY][2] = "[<font color='WHITE'>Ϙ</font>]";
     }
 
     public static StringBuilder printMapRow(int y){
@@ -63,57 +63,57 @@ public class Map {
         String west = "Go WEST ";
 
         if(map[posX][posY][4] == "Top"){
-            option1 = "[1] " + south;
+            option1 = "[<font color='YELLOW'>1</font>] " + south;
             possibleoptions[0] = 'S';
             if(map[posX][posY][5] == "OuterL"){
-                option2 = "[2] " + east;
+                option2 = "[<font color='YELLOW'>2</font>] " + east;
                 numberofoptions = 2;                    //SE
                 possibleoptions[1] = 'E';
             } else if(map[posX][posY][5] == "OuterR"){
-                option2 = "[2] " + west;
+                option2 = "[<font color='YELLOW'>2</font>] " + west;
                 numberofoptions = 2;                    //SW
                 possibleoptions[1] = 'W';
             } else{
-                option2 = "[2] " + east;
-                option3 = "[3] " + west;
+                option2 = "[<font color='YELLOW'>2</font>] " + east;
+                option3 = "[<font color='YELLOW'>3</font>] " + west;
                 numberofoptions = 3;                    //SEW
                 possibleoptions[1] = 'E';
                 possibleoptions[2] = 'W';
             }
         } else if(map[posX][posY][4] == "Bottom"){
-            option1 = "[1] " + north;
+            option1 = "[<font color='YELLOW'>1</font>] " + north;
             possibleoptions[0] = 'N';
             if(map[posX][posY][5] == "OuterL"){
-                option2 = "[2] " + east;
+                option2 = "[<font color='YELLOW'>2</font>] " + east;
                 numberofoptions = 2;                    //NE
                 possibleoptions[1] = 'E';
             } else if(map[posX][posY][5] == "OuterR"){
-                option2 = "[2] " + west;
+                option2 = "[<font color='YELLOW'>2</font>] " + west;
                 numberofoptions = 2;                    //NW
                 possibleoptions[1] = 'W';
             } else{
-                option2 = "[2] " + east;
-                option3 = "[3] " + west;
+                option2 = "[<font color='YELLOW'>2</font>] " + east;
+                option3 = "[<font color='YELLOW'>3</font>] " + west;
                 numberofoptions = 3;                    //NEW
                 possibleoptions[1] = 'E';
                 possibleoptions[2] = 'W';
             }
         } else {
-            option1 = "[1] " + north;
-            option2 = "[2] " + south;
+            option1 = "[<font color='YELLOW'>1</font>] " + north;
+            option2 = "[<font color='YELLOW'>2</font>] " + south;
             possibleoptions[0] = 'N';
             possibleoptions[1] = 'S';
             if(map[posX][posY][5] == "OuterR"){
-                option3 = "[3] " + west;
+                option3 = "[<font color='YELLOW'>3</font>] " + west;
                 numberofoptions = 3;                    //NSW
                 possibleoptions[2] = 'W';
             } else if(map[posX][posY][5] == "OuterL"){
-                option3 = "[3] " + east;                //NSE
+                option3 = "[<font color='YELLOW'>3</font>] " + east;                //NSE
                 numberofoptions = 3;
                 possibleoptions[2] = 'E';
             } else{
-                option3 = "[3] " + east;
-                option4 = "[4] " + west;
+                option3 = "[<font color='YELLOW'>3</font>] " + east;
+                option4 = "[<font color='YELLOW'>4</font>] " + west;
                 numberofoptions = 4;                    //NSEW
                 possibleoptions[2] = 'E';
                 possibleoptions[3] = 'W';
@@ -123,25 +123,11 @@ public class Map {
 
     public static void moveOnMap(char direction){
         if(PlayerCharacter.getEnergy() < 30){
-            displayinformation = "You don't have enough energy to move. You should [R] rest.              ";
+            displayinformation = "You don't have enough energy to move. You should [<font color='YELLOW'>R</font>] rest.              ";
         } else {
             //Replace tile on map with terrain
-            switch(map[posX][posY][1]){
-                case "Heath":
-                    map[posX][posY][2] = "[-]";
-                    break;
-                case "Forest":
-                    map[posX][posY][2] = "[\"]";
-                    break;
-                case "Mountains":
-                    map[posX][posY][2] = "[Ѧ]";
-                    break;
-                case "Swamp":
-                    map[posX][posY][2] = "[~]";
-                    break;
-                case "Town":
-                    map[posX][posY][2] = "[ʭ]";
-            }
+            map[posX][posY][2] = getTileIcon();
+
             //Move in a direction
             if(direction == 'N'){
                 posY -= 1;
@@ -156,21 +142,42 @@ public class Map {
             if(map[posX][posY][0] == "False" && map[posX][posY][3] != "Town"){
                 generateTerrain(posX, posY);
             }
-            PlayerCharacter.setEnergy(-30);
+            PlayerCharacter.setEnergy(PlayerCharacter.getEnergy() - 30);
             setDisplayInformation(direction);
             spawnPlayerOnMap();
             movePossibilities();
         }
+    }
+
+    public static String getTileIcon(){
+        String icon = "";
+        switch(map[posX][posY][1]){
+            case "Heath":
+                icon = "[<font color='KHAKI'>-</font>]";
+                break;
+            case "Forest":
+                icon = "[<font color='LIME'>\"</font>]";
+                break;
+            case "Mountains":
+                icon = "[<font color='LIGHTGRAY'>Ѧ</font>]";
+                break;
+            case "Swamp":
+                icon = "[<font color='BLUE'>~</font>]";
+                break;
+            case "Town":
+                icon = "[<font color='GOLD'>₮</font>]";
+        }
+        return icon;
     }
     public static void restOnMap(){
         int infopick = 0;
         if(PlayerCharacter.getEnergy() == PlayerCharacter.getMaxEnergy()){
             infopick = 2;
         } else if(PlayerCharacter.getEnergy() + 20 > PlayerCharacter.getMaxEnergy()){
-            PlayerCharacter.setEnergy(true);
+            PlayerCharacter.setEnergy(PlayerCharacter.getMaxEnergy());
             infopick = 1;
         } else if(PlayerCharacter.getEnergy() + 20 <= PlayerCharacter.getMaxEnergy()){
-            PlayerCharacter.setEnergy(20);
+            PlayerCharacter.setEnergy(PlayerCharacter.getEnergy() + 20);
             infopick = 1;
         }
         switch(infopick){
@@ -233,7 +240,7 @@ public class Map {
 
     public static String getNameofTile(){
         if(map[posX][posY][3] == "Terrain"){
-            return "The " + map[posX][posY][1].toUpperCase();
+            return "The " + map[posX][posY][1].toUpperCase() + " " + getTileIcon();
         } else {
             return map[posX][posY][1];
         }

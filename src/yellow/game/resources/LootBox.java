@@ -1,10 +1,10 @@
 package yellow.game.resources;
 
 import yellow.game.gui.LayoutPicker;
-import yellow.game.resources.objects.Head;
-import yellow.game.resources.objects.Item;
+import yellow.game.resources.objects.items.Head;
+import yellow.game.resources.objects.items.Item;
 import yellow.game.resources.objects.PlayerCharacter;
-import yellow.game.resources.objects.Weapon;
+import yellow.game.resources.objects.items.Weapon;
 
 import java.util.Random;
 
@@ -64,12 +64,12 @@ public class LootBox {
                 //Dit moet naar assign methode en het wapen in de working storage array
                 Weapon weaponFound = new Weapon(equipablesAddition(), "");
                 holdLoot(weaponFound);
-                setLootName(weaponFound.getName() + " (LVL " + weaponFound.getLevel() + ")");
+                setLootName(weaponFound.getName() + " !level<font color='WHITE'>" + weaponFound.getLevel() + "</font>");
                 break;
             case 2: //loot = HEAD
                 Head headFound = new Head(equipablesAddition(), "");
                 holdLoot(headFound);
-                setLootName(headFound.getName() + " (LVL " + headFound.getLevel() + ")");
+                setLootName(headFound.getName() + " !level<font color='WHITE'>" + headFound.getLevel() + "</font>");
         }
     }
 

@@ -42,7 +42,58 @@ public class ScreenDrawer {
         drawString(y, "");
         drawString(z, "");
     }
-    public static void drawString(int line, String fill) {
+    public static String convertToHTML(String input){
+        String output = input;
+        // Allow ampersand
+        output = output.replaceAll("&", "&amp;");
+        // Allow spaces
+        output = output.replaceAll(" ", "&#32;");
+        // Allow tag symbols
+        output = output.replaceAll("<", "&lt;");
+        output = output.replaceAll(">", "&gt;");
+        // Reverse HTML tags
+        output = output.replaceAll( "&lt;font","<font");
+        output = output.replaceAll("'&gt;", "'>");
+        output = output.replaceAll("&lt;/font&gt;", "</font>");
+        output = output.replaceAll("&lt;em&gt;", "<em>");
+        output = output.replaceAll("&lt;/em&gt;", "</em>");
+        // Color certain variables
+        output = output.replaceAll("&#32;DEF&#32;", "<font color='ORANGE'> DEF </font>");
+        output = output.replaceAll("&#32;ATT&#32;", "<font color='RED'> ATT </font>");
+        output = output.replaceAll("&#32;WGHT&#32;", "<font color='LIGHTGRAY'> WGHT </font>");
+        output = output.replaceAll("&#32;TWOHANDED&#32;", "<font color='LIGHTGRAY'> TWOHANDED </font>");
+        output = output.replaceAll("&#32;RANGED&#32;", "<font color='LIGHTGRAY'> RANGED </font>");
+        output = output.replaceAll("&#32;MGC&#32;", "<font color='DODGERBLUE'> MGC </font>");
+        output = output.replaceAll("&lt;empty&#32;slot&gt;", "<font color='GRAY'>&lt;empty slot&gt</font>");
+        output = output.replaceAll("!level", "<font color='CYAN'>L</font>");
+        // Color magic
+        output = output.replaceAll("FIRE", "<font color='#FF4500'>FIRE</font>");
+        output = output.replaceAll("WATER", "<font color='DODGERBLUE'>WATER</font>");
+        output = output.replaceAll("EARTH", "<font color='#DAA520'>EARTH</font>");
+        output = output.replaceAll("AIR", "<font color='#F0FFFF'>AIR</font>");
+        output = output.replaceAll("ACID", "<font color='#ADFF2F'>ACID</font>");
+        output = output.replaceAll("PSYCHO", "<font color='#F0F8FF'>PSYCHO</font>");
+        output = output.replaceAll("THUNDER", "<font color='YELLOW'>THUNDER</font>");
+        output = output.replaceAll("FROST", "<font color='#E0FFFF'>FROST</font>");
+        output = output.replaceAll("NECRO", "<font color='#708090'>NECRO</font>");
+        // Set (non-default) colors
+        output = output.replaceAll("'DODGERBLUE'", "'#1E90FF'");
+        output = output.replaceAll("'CYAN'", "'#00FFFF'");
+        output = output.replaceAll("'MAGENTA'", "'#FF00FF'");
+        output = output.replaceAll("'LIGHTGRAY'", "'#A9A9A9'");
+        output = output.replaceAll("'GOLD'", "'#FFD700'");
+        output = output.replaceAll("'KHAKI'", "'#F0E68C'");
+        return output;
+    }
+
+    public static void drawString(int line, String input) {
+    //    String fill = input.replaceAll("&", "&amp;");
+      //  fill.replaceAll(" ", "&#32;");
+        String fill = convertToHTML(input);
+    //    fill = fill.replaceAll("<", "&lt;");
+    //    fill = fill.replaceAll(">", "&gt;");
+    //    String fill = input.replaceAll("&", "&amp;");
+    //    fill = fill.replaceAll(" ", "&#32;");
         switch (line) {
             case 1:
                 line01 = fill;

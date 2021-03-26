@@ -43,6 +43,9 @@ public class AudioPlayer {
     public static void attackSounds(String attack){
         String audiofile = "attacks/";
         switch (attack){
+            case "PUNCH":
+                //audiofile += "ZONDER_WAPEN.WAV";
+                break;
             case "SHOOT":
             case "FIRE":
             case "BLAST":
